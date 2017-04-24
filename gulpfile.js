@@ -10,7 +10,7 @@ var plumber     = require('gulp-plumber');
 gulp.task('browserSync', function() {
     browserSync.init({
         server: {
-          baseDir: 'app'
+          baseDir: './'
         }
     });
 });
@@ -25,7 +25,7 @@ gulp.task('sass', function() {
   return gulp.src('assets/sass/main.scss')
           .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
           .pipe(sass())
-          .pipe(gulp.dest('app/css'))
+          .pipe(gulp.dest('assets/css'))
           .pipe(browserSync.reload({stream: true}));
 });
 

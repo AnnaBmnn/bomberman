@@ -1,0 +1,20 @@
+$cell-width: 50px;
+$cell-height: 50px;
+
+.map {
+    width: (17*$cell-width);
+    height: (13*$cell-height);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    
+    .cell {
+        height: $cell-height;
+        width: $cell-width;
+        background-color: blue;
+        float: left;
+        border: 1px solid black;
+    }
+}
+
