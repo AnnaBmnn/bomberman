@@ -34,10 +34,19 @@ var map = function(rows, columns) {
     this.cells = [rows];
     
     this.generateMap = function(){
-        for(var i = 0; i<rows; i++){
+        for(var i = 0; i<this.rows; i++){
             this.cells[i] = [this.columns];
-            for(var j = 0; j<columns; j++){
-                var myCell = new cell(i, j, 'unbreakable');
+            
+            for(var j = 0; j<this.columns; j++){
+                //define the cell with status unbreakable depending on their place 
+                var status = 'empty';
+                if(i==0 || i==this.rows-1 || j==0 || j==this.columns-1)
+                    status = 'unbreakable'
+                else
+                    if(j%2==0 && i%2==0)
+                        status = 'unbreakable'
+
+                var myCell = new cell(i, j, status);
                 myCell.createDiv(this.div);
                 this.cells[i][j] = myCell;
             }
