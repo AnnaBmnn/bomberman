@@ -12,9 +12,20 @@ $cell-height: 50px;
     .cell {
         height: $cell-height;
         width: $cell-width;
-        background-color: blue;
         float: left;
         border: 1px solid black;
+    }
+    
+    .empty {
+        background-color: blue;
+    }
+    
+    .unbrokable {
+        background-color: red;
+    }
+    
+    .brokable {
+        background-color: yellow;
     }
 }
 

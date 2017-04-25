@@ -13,6 +13,11 @@ body {
   .map .cell {
     height: 50px;
     width: 50px;
-    background-color: blue;
     float: left;
     border: 1px solid black; }
+  .map .empty {
+    background-color: blue; }
+  .map .unbrokable {
+    background-color: red; }
+  .map .brokable {
+    background-color: yellow; }
