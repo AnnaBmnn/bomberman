@@ -22,8 +22,8 @@ var cell = function(posX, posY, status, div) {
 CELL.STATUS
 
 cell.status = empty --> cell is empty
-cell.status = unbrokable --> cell is an unbrokable wall
-cell.status = brokable --> cell is an brokable wall
+cell.status = unbreakable --> cell is an unbreakable wall
+cell.status = breakable --> cell is an breakable wall
 
 */
 
@@ -37,10 +37,9 @@ var map = function(rows, columns) {
         for(var i = 0; i<rows; i++){
             this.cells[i] = [this.columns];
             for(var j = 0; j<columns; j++){
-                var myCell = new cell(i, j, 'unbrokable');
+                var myCell = new cell(i, j, 'unbreakable');
                 myCell.createDiv(this.div);
                 this.cells[i][j] = myCell;
-                console.log(this.cells[i][j]);
             }
         }
     }
@@ -49,13 +48,3 @@ var map = function(rows, columns) {
 var map = new map(13,17);
 map.generateMap();
 console.log(map.cells);
-
-/*
-
-MAP : generateMap (création d’un tableau de cell avec le bon statue (0 : vide, 1 mur incassable )
-	drawMap(création des div qui représente les
-	generateRandomBonus( bonus : tableau contenant le nombre de bonus)
-	numberOfCell
-	tableau de cell
-
-*/

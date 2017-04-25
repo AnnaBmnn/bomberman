@@ -17,7 +17,7 @@ body {
     border: 1px solid black; }
   .map .empty {
     background-color: blue; }
-  .map .unbrokable {
+  .map .unbreakable {
     background-color: red; }
-  .map .brokable {
+  .map .breakable {
     background-color: yellow; }
