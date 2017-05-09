@@ -1,0 +1,62 @@
+$bomberman-width: 30px;
+$bomberman-height: 30px;
+
+.avatar_down {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/player.png');
+    animation: down 0.8s steps(4) infinite;
+    // margin: 5px;
+}
+
+@keyframes down {
+  from { background-position: 0px 0; }
+  to { background-position: -125px 0px; }
+}
+
+.avatar_left {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/player.png');
+    animation: left 0.8s steps(4) infinite;
+    margin: 5px;
+}
+
+// @keyframes left {
+//   from { background-position: -95px -32px; }
+//   to { background-position: 0px -32px; }
+// }
+
+.avatar_right {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/player.png');
+    animation: right 0.8s steps(4) infinite;
+    margin: 5px;
+}
+
+// @keyframes right {
+//   from { background-position: -95px -32px; }
+//   to { background-position: 0px -32px; }
+// }
+
+.avatar_up {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/player.png');
+    animation: up 0.8s steps(4) infinite;
+    margin: 5px;
+}
+
+// @keyframes up {
+//   from { background-position: -95px -32px; }
+//   to { background-position: 0px -32px; }
+// }

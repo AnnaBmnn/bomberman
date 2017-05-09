@@ -8,24 +8,23 @@ $cell-height: 50px;
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    
+
     .cell {
         height: $cell-height;
         width: $cell-width;
         float: left;
         border: 1px solid black;
     }
-    
+
     .empty {
         background-color: blue;
     }
-    
+
     .unbreakable {
         background-color: red;
     }
-    
+
     .breakable {
         background-color: yellow;
     }
 }
-
