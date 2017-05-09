@@ -45,6 +45,12 @@ body {
   animation: left 0.8s steps(4) infinite;
   margin: 5px; }
 
+@keyframes left {
+  from {
+    background-position: 0px -35px; }
+  to {
+    background-position: 125px -35px; } }
+
 .avatar_right {
   position: absolute;
   width: 30px;
@@ -54,6 +60,12 @@ body {
   animation: right 0.8s steps(4) infinite;
   margin: 5px; }
 
+@keyframes right {
+  from {
+    background-position: 0px -70px; }
+  to {
+    background-position: -125px -70px; } }
+
 .avatar_up {
   position: absolute;
   width: 30px;
@@ -62,3 +74,9 @@ body {
   background-image: url("../images/player.png");
   animation: up 0.8s steps(4) infinite;
   margin: 5px; }
+
+@keyframes up {
+  from {
+    background-position: 0px -105px; }
+  to {
+    background-position: -125px -105px; } }
