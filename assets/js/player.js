@@ -30,7 +30,7 @@ var pirate_player = function(playerPosX, playerPosY, div) {    
                     //up
                     that.posX = Math.floor((that.playerPosX+15) / 50); //
                     that.posY = Math.floor((that.playerPosY+25) / 50); //
-                    if (map.isUnbreakable(that.posX, that.posY) === false) {
+                    if (map.cells[that.posY][that.posX].status === 'empty') {
                         console.log(map.isUnbreakable(that.posX, that.posY));
                         that.playerPosY -= 5;
                         that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[3]);
@@ -40,7 +40,7 @@ var pirate_player = function(playerPosX, playerPosY, div) {    
                     //right
                     that.posX = Math.floor((that.playerPosX+35) / 50); //
                     that.posY = Math.floor((that.playerPosY +30)/ 50); //
-                    if (map.isUnbreakable(that.posX, that.posY) === false) {
+                    if (map.cells[that.posY][that.posX].status === 'empty') {
                         that.playerPosX += 5;
                         that.div.classList.remove(that.sprite[0], that.sprite[2], that.sprite[3]);
                         that.div.classList.add(that.sprite[1]);
@@ -49,7 +49,7 @@ var pirate_player = function(playerPosX, playerPosY, div) {    
                   //down
                   that.posX = Math.floor((that.playerPosX+15) / 50); //
                   that.posY = Math.floor((that.playerPosY+35) / 50); //
-                  if (map.isUnbreakable(that.posX, that.posY) === false) {
+                  if (map.cells[that.posY][that.posX].status === 'empty') {
                     that.playerPosY += 5;
                     that.div.classList.remove(that.sprite[1], that.sprite[0], that.sprite[3]);
                     that.div.classList.add(that.sprite[2]);
@@ -58,7 +58,7 @@ var pirate_player = function(playerPosX, playerPosY, div) {    
                   //left
                   that.posX = Math.floor((that.playerPosX-5) / 50); //
                   that.posY = Math.floor((that.playerPosY+30) / 50); //
-                  if (map.isUnbreakable(that.posX, that.posY) === false) {
+                  if (map.cells[that.posY][that.posX].status === 'empty') {
                     that.playerPosX -= 5;
                     that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[0]);
                     that.div.classList.add(that.sprite[3]);
