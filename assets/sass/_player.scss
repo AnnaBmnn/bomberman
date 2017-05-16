@@ -8,7 +8,6 @@ $bomberman-height: 30px;
     will-change: transform;
     background-image: url('../images/player.png');
     animation: down 0.8s steps(4) infinite;
-    // margin: 5px;
 }
 
 @keyframes down {
@@ -23,7 +22,6 @@ $bomberman-height: 30px;
     will-change: transform;
     background-image: url('../images/player.png');
     animation: left 0.8s steps(4) infinite;
-    margin: 5px;
 }
 
 @keyframes left {
@@ -38,7 +36,6 @@ $bomberman-height: 30px;
     will-change: transform;
     background-image: url('../images/player.png');
     animation: right 0.8s steps(4) infinite;
-    margin: 5px;
 }
 
 @keyframes right {

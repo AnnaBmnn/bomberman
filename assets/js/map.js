@@ -13,7 +13,7 @@ var cell = function(posX, posY, status, div) {
     }
 
     this.updateStatus = function(newStatus) {
-        this.div.classList.remove(status);
+        this.div.classList.remove(this.status);
         this.status = newStatus;
         this.div.classList.add(newStatus);
     }
@@ -33,6 +33,7 @@ var map = function(rows, columns) {
     this.columns = columns;
     this.div = document.querySelector('.map');
     this.cells = [rows];
+    this.pirates = []; // contains all the players, used by the bomb to know if the bomb kills players or not according to their position on the map
     this.breakableWalls = 100;
 
     this.generateMap = function() {
