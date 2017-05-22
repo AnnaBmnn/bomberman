@@ -1,28 +1,28 @@
-//object cell
-var cell = function(posX, posY, status, secondary_status, div) {
+class cell { // class cell
+  constructor(posX, posY, status, secondary_status, div) {
     this.posX = posX;
     this.posY = posY;
     this.status = status;
     this.secondary_status = secondary_status;
     this.div = div;
-
-    this.createDiv = function(map) {
+}
+  createDiv(map) {
         this.div = document.createElement('div');
         this.div.classList.add('cell');
         this.div.classList.add(this.status);
         if (!this.secondary_status == null)
             this.div.classList.add(this.secondary_status);
-        
+
         map.appendChild(this.div);
     }
 
     // newStatus --> Status we want to had / removeStatus --> true or false (removing previous status)
-    this.updateStatus = function(newStatus, removeStatus) {
+    updateStatus(newStatus, removeStatus) {
         if (removeStatus)
             this.div.classList.remove(this.status);
-        
+
         this.status = newStatus;
-            
+
         this.div.classList.add(newStatus);
     }
 }
@@ -35,9 +35,10 @@ cell.status = unbreakable --> cell is an unbreakable wall
 cell.status = breakable --> cell is an breakable wall
 
 */
-var spawnCorner = 4;
+let spawnCorner = 4;
 
-var map = function(rows, columns) {
+class map {
+  constructor(rows, columns) {
     this.rows = rows;
     this.columns = columns;
     this.div = document.querySelector('.map');
@@ -45,25 +46,25 @@ var map = function(rows, columns) {
     this.pirates = []; // contains all the players, used by the bomb to know if the bomb kills players or not according to their position on the map
     this.breakableWalls = 100;
     this.bonusNumber = 80;
-
-    this.generateMap = function() {
-        for (var i = 0; i < this.rows; i++) {
+}
+  generateMap() {
+        for (let i = 0; i < this.rows; i++) {
             this.cells[i] = [this.columns];
 
-            for (var j = 0; j < this.columns; j++) {
+            for (let j = 0; j < this.columns; j++) {
                 //define the cell with status unbreakable depending on their place
-                var status = 'empty';
+                let status = 'empty';
                 if (this.isUnbreakable(i, j))
                     status = 'unbreakable'
                 //define the cell with status breakable randomly
-                var myCell = new cell(i, j, status, null);
+                let myCell = new cell(i, j, status, null);
                 myCell.createDiv(this.div);
                 this.cells[i][j] = myCell;
             }
         }
     }
-    this.generateBreakableWall = function() {
-        for (var k = 0; k < this.breakableWalls; k++) {
+  generateBreakableWall() {
+        for (let k = 0; k < this.breakableWalls; k++) {
             //random x and y while the cell[x][y] is a corner or a unbreakableWall
             do {
                 var x = alea(1, this.rows);
@@ -74,9 +75,9 @@ var map = function(rows, columns) {
                         this.bonusNumber--;
                 }
             } while ( (this.isUnbreakable(x, y)) || (this.isCorner(x, y)));
-            
+
             this.cells[x][y].updateStatus('breakable', true);
-            
+
             if (bonus === 1) {
                 this.cells[x][y].secondary_status = 'bonus';
             }
@@ -84,7 +85,7 @@ var map = function(rows, columns) {
     }
 
     //test the cell[x][y] is unbreakable depending on their place
-    this.isUnbreakable = function(x, y) {
+  isUnbreakable(x, y) {
         if (x == 0 || x == this.rows - 1 || y == 0 || y == this.columns - 1) // all the cells around
             return true;
         else
@@ -94,7 +95,7 @@ var map = function(rows, columns) {
     }
 
     //test if the cells[x][y] is a corner case (corner case + or - number of powercase) or not
-    this.isCorner = function(x, y) {
+  isCorner(x, y) {
         //check if the random number give a cell in the corner
         if (x == 1) {
             if (y >= 1 && y <= spawnCorner)
@@ -132,7 +133,7 @@ function alea(min, max) {
     return (Math.floor((max - min) * Math.random()) + min);
 }
 
-var map = new map(13, 17);
+map = new map(13, 17);
 console.log(map.cells);
 map.generateMap();
 map.generateBreakableWall();
