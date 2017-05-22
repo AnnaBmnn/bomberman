@@ -1,23 +1,32 @@
 //object cell
-var cell = function(posX, posY, status, div) {
+var cell = function(posX, posY, status, secondary_status, div) {
     this.posX = posX;
     this.posY = posY;
     this.status = status;
+    this.secondary_status = secondary_status;
     this.div = div;
 
     this.createDiv = function(map) {
         this.div = document.createElement('div');
         this.div.classList.add('cell');
         this.div.classList.add(this.status);
+        if (!this.secondary_status == null)
+            this.div.classList.add(this.secondary_status);
+        
         map.appendChild(this.div);
     }
 
-    this.updateStatus = function(newStatus) {
-        this.div.classList.remove(this.status);
+    // newStatus --> Status we want to had / removeStatus --> true or false (removing previous status)
+    this.updateStatus = function(newStatus, removeStatus) {
+        if (removeStatus)
+            this.div.classList.remove(this.status);
+        
         this.status = newStatus;
+            
         this.div.classList.add(newStatus);
     }
 }
+
 /*
 CELL.STATUS
 
@@ -35,6 +44,7 @@ var map = function(rows, columns) {
     this.cells = [rows];
     this.pirates = []; // contains all the players, used by the bomb to know if the bomb kills players or not according to their position on the map
     this.breakableWalls = 100;
+    this.bonusNumber = 80;
 
     this.generateMap = function() {
         for (var i = 0; i < this.rows; i++) {
@@ -46,7 +56,7 @@ var map = function(rows, columns) {
                 if (this.isUnbreakable(i, j))
                     status = 'unbreakable'
                 //define the cell with status breakable randomly
-                var myCell = new cell(i, j, status);
+                var myCell = new cell(i, j, status, null);
                 myCell.createDiv(this.div);
                 this.cells[i][j] = myCell;
             }
@@ -58,8 +68,18 @@ var map = function(rows, columns) {
             do {
                 var x = alea(1, this.rows);
                 var y = alea(1, this.columns);
-            } while (this.isUnbreakable(x, y) || this.isCorner(x, y))
-            this.cells[x][y].updateStatus('breakable');
+                if (this.bonusNumber > 0) {
+                    var bonus = Math.round(Math.random());
+                    if (bonus === 1)
+                        this.bonusNumber--;
+                }
+            } while ( (this.isUnbreakable(x, y)) || (this.isCorner(x, y)));
+            
+            this.cells[x][y].updateStatus('breakable', true);
+            
+            if (bonus === 1) {
+                this.cells[x][y].secondary_status = 'bonus';
+            }
         }
     }
 
@@ -113,5 +133,6 @@ function alea(min, max) {
 }
 
 var map = new map(13, 17);
+console.log(map.cells);
 map.generateMap();
 map.generateBreakableWall();

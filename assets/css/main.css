@@ -21,6 +21,8 @@ body {
     background-color: red; }
   .map .breakable {
     background-color: yellow; }
+  .map .map .bonus_ {
+    background-color: #00ff1d; }
 
 .bomb {
   background-image: url("../images/bomb.png");

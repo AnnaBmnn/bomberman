@@ -21,20 +21,28 @@ class Bomb {
             coordCellY = parseInt(this.posX / 50);
         // test if the player is around the bomb + if there is some walls to break, according to the powerKill of the bomb
         if (map.cells[coordCellX - 1][coordCellY].status !== 'unbreakable' || map.cells[coordCellX + 1][coordCellY].status !== 'unbreakable') { // prevent breakable cells to be destruct if they are behind unbreakable cell
-            for (var i = coordCellX - this.powerDestruct; i <= coordCellX + this.powerDestruct; i++) { // test on Y
-                if (0 < i && i < map.rows) {
-                    if (map.cells[i][coordCellY].status == 'breakable') {
-                        map.cells[i][coordCellY].updateStatus('empty');
-                    }
+            for (var i = coordCellX - this.powerDestruct; i <= coordCellX + this.powerDestruct; i++) {
+            if (0 < i && i < map.rows) {
+                if (map.cells[i][coordCellY].status == 'breakable') {
+                    if (map.cells[i][coordCellY].secondary_status == 'bonus')
+                    {
+                        map.cells[i][coordCellY].updateStatus('bonus_', true);   
+                    } else 
+                        map.cells[i][coordCellY].updateStatus('empty', true);
                 }
             }
+        }
         }
         if (map.cells[coordCellY - 1][coordCellX].status !== 'unbreakable' || map.cells[coordCellY + 1][coordCellX].status !== 'unbreakable') {
             for (var i = coordCellY - this.powerDestruct; i <= coordCellY + this.powerDestruct; i++) { // test on X
                 if (0 < i && i < map.columns) {
-                    if (map.cells[coordCellX][i].status == 'breakable') {
-                        map.cells[coordCellX][i].updateStatus('empty');
-                    }
+                    if (map.cells[i][coordCellY].status == 'breakable') {
+                        if (map.cells[i][coordCellY].secondary_status == 'bonus')
+                        {
+                            map.cells[i][coordCellY].updateStatus('bonus_', true);   
+                        } else 
+                            map.cells[i][coordCellY].updateStatus('empty', true);
+                }
                 }
             }
         }

@@ -25,59 +25,71 @@ var pirate_player = function(playerLives, playerPosX, playerPosY, div) {    
                 // Position calcul
                 that.posX = Math.floor(that.playerPosX / 50); //
                 that.posY = Math.floor(that.playerPosY / 50); //
-                console.log("Pos x " + that.posX);
-                console.log("Pos y " + that.posY);
-                console.log("PosX Player " + that.playerPosX);
-                console.log("PosY Player " + that.playerPosY);
+//                console.log("Pos x " + that.posX);
+//                console.log("Pos y " + that.posY);
+//                console.log("PosX Player " + that.playerPosX);
+//                console.log("PosY Player " + that.playerPosY);
 
 
                 if (e.keyCode == that.movement[0]) {
                     //up
                     that.posX = Math.floor((that.playerPosX + 15) / 50); //
                     that.posY = Math.floor((that.playerPosY + 25) / 50); //
-                    if (map.cells[that.posY][that.posX].status === 'empty') {
+                    if ( (map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_') ) {
                         that.playerPosY -= 5;
                         that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[3]);
                         that.div.classList.add(that.sprite[0]);
+                        
+                        if (map.cells[that.posY][that.posX].status === 'bonus_')
+                            map.cells[that.posY][that.posX].updateStatus('empty', true);
                     }
                 } else if (e.keyCode == that.movement[1]) {
                     //right
                     that.posX = Math.floor((that.playerPosX + 35) / 50); //
                     that.posY = Math.floor((that.playerPosY + 30) / 50); //
-                    if (map.cells[that.posY][that.posX].status === 'empty') {
+                    if ( (map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_') ) {
                         that.playerPosX += 5;
                         that.div.classList.remove(that.sprite[0], that.sprite[2], that.sprite[3]);
                         that.div.classList.add(that.sprite[1]);
+                        
+                        if (map.cells[that.posY][that.posX].status === 'bonus_')
+                            map.cells[that.posY][that.posX].updateStatus('empty', true);
                     }
                 } else if (e.keyCode == that.movement[2]) {
                     //down
                     that.posX = Math.floor((that.playerPosX + 15) / 50); //
                     that.posY = Math.floor((that.playerPosY + 35) / 50); //
-                    if (map.cells[that.posY][that.posX].status === 'empty') {
+                    if ( (map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_') ) {
                         that.playerPosY += 5;
                         that.div.classList.remove(that.sprite[1], that.sprite[0], that.sprite[3]);
                         that.div.classList.add(that.sprite[2]);
+                        
+                        if (map.cells[that.posY][that.posX].status === 'bonus_')
+                            map.cells[that.posY][that.posX].updateStatus('empty', true);
                     }
                 } else if (e.keyCode == that.movement[3]) {
                     //left
                     that.posX = Math.floor((that.playerPosX - 5) / 50); //
                     that.posY = Math.floor((that.playerPosY + 30) / 50); //
-                    if (map.cells[that.posY][that.posX].status === 'empty') {
+                    if ( (map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_') ) {
                         that.playerPosX -= 5;
                         that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[0]);
                         that.div.classList.add(that.sprite[3]);
+                        
+                        if (map.cells[that.posY][that.posX].status === 'bonus_')
+                            map.cells[that.posY][that.posX].updateStatus('empty', true);
                     }
-                }
-                else if (e.keyCode == that.movement[4] && that.enableBomb > 0){ //space bar to launch a bomb
-                  map.pirates[map.pirates.length-1].playerPosY = that.playerPosY; // update the position of the player at each bomb launch
-                  map.pirates[map.pirates.length-1].playerPosX = that.playerPosX;
-                  that.createBomb();
+                } else if (e.keyCode == that.movement[4] && that.enableBomb > 0) {
+                    //space bar to launch a bomb
+                    map.pirates[map.pirates.length-1].playerPosY = that.playerPosY; // update the position of the player at each bomb launch
+                    map.pirates[map.pirates.length-1].playerPosX = that.playerPosX;
+                    that.createBomb();
                 }
                 that.div.style.top = that.playerPosY + "px";
                 that.div.style.left = that.playerPosX + "px";
             }, false);
         },
-        this.createBomb = function(){
+        this.createBomb = function() {
             this.enableBomb -= 1;
             let bomb = new Bomb(this.bombKill, this.playerPosX, this.playerPosY, this.bombDelay, this);
             bomb.launchBomb();
