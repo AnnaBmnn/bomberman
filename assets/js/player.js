@@ -23,8 +23,10 @@ var pirate_player = function(playerLives, playerPosX, playerPosY, div) {    
             that.playerPosY = playerPosY;
             window.addEventListener('keydown', function(e) {
                 // Position calcul
-                that.posX = Math.floor(that.playerPosX / 50); //
-                that.posY = Math.floor(that.playerPosY / 50); //
+                that.posX = Math.round(that.playerPosX / 50); //
+                that.posY = Math.round(that.playerPosY / 50); //
+                console.log(that.posX);
+                console.log(that.posY);
 //                console.log("Pos x " + that.posX);
 //                console.log("Pos y " + that.posY);
 //                console.log("PosX Player " + that.playerPosX);

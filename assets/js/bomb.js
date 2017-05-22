@@ -17,6 +17,10 @@ class Bomb {
         map.appendChild(this.div); 
     }
     destructingBomb() {
+        console.log(this.posY);
+        console.log(parseInt(this.posY / 50));
+        console.log(this.posX);
+        console.log(parseInt(this.posX / 50));
         var coordCellX = parseInt(this.posY / 50),
             coordCellY = parseInt(this.posX / 50);
         // test if the player is around the bomb + if there is some walls to break, according to the powerKill of the bomb

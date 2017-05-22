@@ -42,8 +42,8 @@ body {
 
 .avatar_down {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   will-change: transform;
   background-image: url("../images/player.png");
   animation: down 0.8s steps(4) infinite; }
@@ -56,8 +56,8 @@ body {
 
 .avatar_left {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   will-change: transform;
   background-image: url("../images/player.png");
   animation: left 0.8s steps(4) infinite; }
@@ -70,8 +70,8 @@ body {
 
 .avatar_right {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   will-change: transform;
   background-image: url("../images/player.png");
   animation: right 0.8s steps(4) infinite; }
@@ -84,8 +84,8 @@ body {
 
 .avatar_up {
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   will-change: transform;
   background-image: url("../images/player.png");
   animation: up 0.8s steps(4) infinite;
