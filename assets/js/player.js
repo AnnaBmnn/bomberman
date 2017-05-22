@@ -5,7 +5,7 @@ var pirate_player = function(playerLives, playerPosX, playerPosY, div) {    
     this.playerPosY = playerPosY; 
     this.movement = new Array(); 
     this.bombDelay = 2000;  
-    this.bombRange = 2;
+    this.bombKill = 2;
     this.enableBomb = 1; //number of bomb you can launch  
     this.div = div;    
     this.createPlayer = function() {  
@@ -79,11 +79,12 @@ var pirate_player = function(playerLives, playerPosX, playerPosY, div) {    
         },
         this.createBomb = function(){
             this.enableBomb -= 1;
-            let bomb = new Bomb(this.bombRange, this.playerPosX, this.playerPosY, this.bombDelay, this);
+            let bomb = new Bomb(this.bombKill, this.playerPosX, this.playerPosY, this.bombDelay, this);
             bomb.launchBomb();
             setTimeout(function(){ // delay until the player can launch a bomb again
               pirate_player.enableBomb += 1;
               bomb.destructingBomb();
+              bomb.killingBomb();
             }, this.bombDelay);
         };
 }
