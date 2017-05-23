@@ -11,16 +11,32 @@ class Bomb {
     launchBomb() {
         this.div = document.createElement('div');
         this.div.classList.add('bomb');
-        this.div.style.top = this.posY + 13 + "px"; // + 13 to place the bomb at his feet
-        this.div.style.left = this.posX + 13 + "px";
-        let map = document.querySelector('.map');        
-        map.appendChild(this.div); 
+        this.div.style.top = this.posY + "px"; // + 13 to place the bomb at his feet
+        this.div.style.left = this.posX + "px";
+
+        let mapDiv = document.querySelector('.map');        
+        mapDiv.appendChild(this.div); 
+        let coordCellX = parseInt(this.posX/ 50),
+            coordCellY = parseInt(  this.posY/50);
+
+        for (let i = coordCellX - this.powerKill; i <= coordCellX + this.powerKill; i++) { // test on Y
+
+            if (0 < i && i < map.rows) {
+                    //don't test for x
+                    for (let j = coordCellY - this.powerKill; j <= coordCellY + this.powerKill; j++) { // test on X
+                        if (0 < j && j < map.columns) {
+                            if(i== coordCellX || j==coordCellY){
+                                if (map.cells[j][i].status == 'empty') {
+                                    map.cells[j][i].updateStatus('dangerous', true);
+                                }
+                            }
+
+                        }
+                    }
+            }
+        }
     }
     destructingBomb() {
-        console.log(this.posY);
-        console.log(parseInt(this.posY / 50));
-        console.log(this.posX);
-        console.log(parseInt(this.posX / 50));
         let coordCellX = parseInt(this.posY / 50),
             coordCellY = parseInt(this.posX / 50);
         // test if the player is around the bomb + if there is some walls to break, according to the powerKill of the bomb
@@ -56,28 +72,25 @@ class Bomb {
         let coordCellX = parseInt(this.posY / 50),
             coordCellY = parseInt(this.posX / 50);
 
-        // testing if some players are around
         for (let i = coordCellX - this.powerKill; i <= coordCellX + this.powerKill; i++) { // test on Y
+
             if (0 < i && i < map.rows) {
-                for (let j = 0; j < map.pirates.length; j++) {
-                    if (map.cells[i][coordCellX].posY === parseInt(map.pirates[j].playerPosY/50) && map.cells[i][coordCellY].posX === parseInt(map.pirates[j].playerPosX/50)) {
-                        map.pirates[j].playerLives -= 1;
-                        return true;
-                        //don't test for x
+                for (let j = coordCellY - this.powerKill; j <= coordCellY + this.powerKill; j++) { // test on X
+                    if (0 < j && j < map.columns) {
+                        if(i == coordCellX || j == coordCellY){
+                            if(map.cells[i][j].status == 'dangerous')
+                                map.cells[i][j].updateStatus('empty', true);
+                            for (let k = 0; k < map.pirates.length; k++) {
+                                if (map.cells[i][j].posY === parseInt(map.pirates[k].playerPosY/50) && map.cells[i][j].posX === parseInt(map.pirates[k].playerPosX/50)) {
+                                    map.pirates[k].playerLives -= 1;
+                                }
+                            }
+
+                        }
+
                     }
                 }
             }
         }
-
-        for (let i = coordCellY - this.powerKill; i <= coordCellY + this.powerKill; i++) { // test on X
-            if (0 < i && i < map.columns) {
-                for (let j = 0; j < map.pirates.length; j++) {
-                    if (map.cells[coordCellY][i].posX === parseInt(map.pirates[j].playerPosX/50) && map.cells[coordCellX][i].posY === parseInt(map.pirates[j].playerPosY/50)) {
-                        map.pirates[j].playerLives -= 1;
-                    }
-                }
-            }
-        }
-
     }
 }

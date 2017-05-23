@@ -20,6 +20,10 @@ $cell-height: 50px;
         background-color: blue;
     }
 
+    .player {
+        background-color: blue;
+    }
+
     .unbreakable {
         background-color: red;
     }
@@ -30,5 +34,9 @@ $cell-height: 50px;
     
     .bonus_ {
         background-color: #00ff1d;
+    }
+
+    .dangerous {
+        background-color: orange;
     }
 }

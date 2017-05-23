@@ -36,7 +36,7 @@ class Player {
         //up
         that.posX = Math.floor((that.playerPosX + 15) / 50); //
         that.posY = Math.floor((that.playerPosY + 25) / 50); //
-        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')) {
+        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')|| (map.cells[that.posY][that.posX].status === 'dangerous')) {
           that.playerPosY -= 5;
           that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[3]);
           that.div.classList.add(that.sprite[0]);
@@ -48,7 +48,7 @@ class Player {
         //right
         that.posX = Math.floor((that.playerPosX + 35) / 50); //
         that.posY = Math.floor((that.playerPosY + 30) / 50); //
-        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')) {
+        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')|| (map.cells[that.posY][that.posX].status === 'dangerous')) {
           that.playerPosX += 5;
           that.div.classList.remove(that.sprite[0], that.sprite[2], that.sprite[3]);
           that.div.classList.add(that.sprite[1]);
@@ -60,7 +60,7 @@ class Player {
         //down
         that.posX = Math.floor((that.playerPosX + 15) / 50); //
         that.posY = Math.floor((that.playerPosY + 35) / 50); //
-        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')) {
+        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')|| (map.cells[that.posY][that.posX].status === 'dangerous')) {
           that.playerPosY += 5;
           that.div.classList.remove(that.sprite[1], that.sprite[0], that.sprite[3]);
           that.div.classList.add(that.sprite[2]);
@@ -72,7 +72,7 @@ class Player {
         //left
         that.posX = Math.floor((that.playerPosX - 5) / 50); //
         that.posY = Math.floor((that.playerPosY + 30) / 50); //
-        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')) {
+        if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus_')|| (map.cells[that.posY][that.posX].status === 'dangerous')) {
           that.playerPosX -= 5;
           that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[0]);
           that.div.classList.add(that.sprite[3]);
@@ -81,9 +81,6 @@ class Player {
             map.cells[that.posY][that.posX].updateStatus('empty', true);
         }
       } else if (e.keyCode == that.movement[4] && that.enableBomb > 0) {
-        //space bar to launch a bomb
-        map.pirates[map.pirates.length - 1].playerPosY = that.playerPosY; // update the position of the player at each bomb launch
-        map.pirates[map.pirates.length - 1].playerPosX = that.playerPosX;
         that.createBomb();
       }
       that.div.style.top = that.playerPosY + "px";

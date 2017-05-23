@@ -17,12 +17,16 @@ body {
     border: 1px solid black; }
   .map .empty {
     background-color: blue; }
+  .map .player {
+    background-color: blue; }
   .map .unbreakable {
     background-color: red; }
   .map .breakable {
     background-color: yellow; }
   .map .bonus_ {
     background-color: #00ff1d; }
+  .map .dangerous {
+    background-color: orange; }
 
 .bomb {
   background-image: url("../images/bomb.png");
