@@ -1,17 +1,18 @@
 class cell { // class cell
-  constructor(posX, posY, status, secondary_status, div) {
+  constructor(posX, posY, status, div) {
     this.posX = posX;
     this.posY = posY;
     this.status = status;
-    this.secondary_status = secondary_status;
+    this.bonusStatus = null;
+    this.bonus = null;
     this.div = div;
 }
   createDiv(map) {
         this.div = document.createElement('div');
         this.div.classList.add('cell');
         this.div.classList.add(this.status);
-        if (!this.secondary_status == null)
-            this.div.classList.add(this.secondary_status);
+        if (!this.bonusStatus == null)
+            this.div.classList.add(this.bonusStatus);
 
         map.appendChild(this.div);
     }
@@ -46,6 +47,7 @@ class map {
     this.pirates = []; // contains all the players, used by the bomb to know if the bomb kills players or not according to their position on the map
     this.breakableWalls = 100;
     this.bonusNumber = 80;
+    this.bonusTypes = ['speed', 'power-bomb', 'add-bomb'];
 }
   generateMap() {
         for (let i = 0; i < this.rows; i++) {
@@ -55,9 +57,9 @@ class map {
                 //define the cell with status unbreakable depending on their place
                 let status = 'empty';
                 if (this.isUnbreakable(i, j))
-                    status = 'unbreakable'
+                    status = 'unbreakable';
                 //define the cell with status breakable randomly
-                let myCell = new cell(i, j, status, null);
+                let myCell = new cell(i, j, status);
                 myCell.createDiv(this.div);
                 this.cells[i][j] = myCell;
             }
@@ -71,15 +73,18 @@ class map {
                 var y = alea(1, this.columns);
                 if (this.bonusNumber > 0) {
                     var bonus = Math.round(Math.random());
-                    if (bonus === 1)
+                    if (bonus === 1) {
                         this.bonusNumber--;
+                        var alea_bonus = alea(0, this.bonusTypes.length);
+                    }
                 }
-            } while ( (this.isUnbreakable(x, y)) || (this.isCorner(x, y)));
+            } while ( (this.isUnbreakable(x, y)) || (this.isCorner(x, y)) );
 
             this.cells[x][y].updateStatus('breakable', true);
 
             if (bonus === 1) {
-                this.cells[x][y].secondary_status = 'bonus';
+                this.cells[x][y].bonusStatus = 'undiscovered';
+                this.cells[x][y].bonus = this.bonusTypes[alea_bonus];
             }
         }
     }
