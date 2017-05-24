@@ -19,32 +19,134 @@ class Bomb {
         mapDiv.appendChild(this.div); 
         let coordCellX = parseInt(this.posX/ 50),
             coordCellY = parseInt(this.posY/50);
-
-        for (let i = coordCellX - this.powerKill; i <= coordCellX + this.powerKill; i++) { // test on Y
-
-            if (0 < i && i < map.rows) {
-                    //don't test for x
-                    for (let j = coordCellY - this.powerKill; j <= coordCellY + this.powerKill; j++) { // test on X
-                        if (0 < j && j < map.columns) {
-                            if (i== coordCellX || j==coordCellY){
-                                if (map.cells[j][i].status == 'empty') {
-                                    map.cells[j][i].updateStatus('dangerous', true);
+        
+//        console.log('coordCellX = ' + coordCellX);
+        for (let i = coordCellX - this.powerKill; i < coordCellX; i++) { // test on Y
+            if (i < 0)
+                i = 0;
+            
+//            console.log('i inférieur = ' + i);
+            if (0 < i && i < map.columns) {
+                
+            
+//            console.log('j = ' + j);
+//            console.log('coordCellY = ' + coordCellY);
+                //don't test for x
+                for (let j = coordCellY - this.powerKill; j < coordCellY; j++) { // test on X
+                    if (j < 0)
+                        j = 0;
+                    
+                    if (0 < j && j < map.rows) {
+                        
+                        let isBlock = false; // initialise isBlock at false at every loop
+                        if (i == coordCellX) {
+                            if (map.cells[j][i].status == 'empty') {
+                                
+                                if (j < coordCellY) {
+                                    for (let k = 1; j + k < coordCellY; k++) {
+                                        if ( (map.cells[j + k][i].status == 'unbreakable') || (map.cells[j + k][i].status == 'breakable') )
+                                            isBlock = true;
+                                    }
+                                    if (!isBlock)
+                                        map.cells[j][i].updateStatus('dangerous', true);
                                 }
                             }
-
+                        }
+                            
+                        else if (j == coordCellY) {
+                            if (map.cells[j][i].status == 'empty') {
+                                if (i < coordCellX) {
+                                    for (let k = 1; i + k < coordCellY; k++) {
+                                        if ( (map.cells[j][i + k].status == 'unbreakable') || (map.cells[j][i + k].status == 'breakable') )
+                                            isBlock = true;
+                                    }
+                                    if (!isBlock)
+                                        map.cells[j][i].updateStatus('dangerous', true);
+                                }
+                            }
                         }
                     }
+                } 
             }
         }
+        
+        for (let i = coordCellX + this.powerKill; i >= coordCellX; i--) { // test on Y
+            if (i > map.columns - 2)
+                i =  map.columns - 2;
+        
+//            console.log('i supérieur = ' + i);
+            if (0 < i && i < map.columns) {
+                //don't test for x
+                for (let j = coordCellY + this.powerKill; j >= coordCellY; j--) { // test on X
+                    if (j > map.rows - 2)
+                            j = map.rows - 2;
+                    
+                    if (0 < j && j < map.rows) {
+                        
+                        let isBlock = false; // initialise isBlock at false at every loop
+                        
+                        if ( (i == coordCellX) && (j == coordCellY) ) {
+                            if (map.cells[j][i].status == 'empty')
+                                map.cells[j][i].updateStatus('dangerous', true);
+                            
+                        } else if (i == coordCellX) {
+                            if (map.cells[j][i].status == 'empty') {
+                                
+                                if (j > coordCellY) {
+                                    for (let k = 1; j - k > coordCellY; k++) {
+                                        if ( (map.cells[j - k][i].status == 'unbreakable') || (map.cells[j - k][i].status == 'breakable') )
+                                            isBlock = true;
+                                    }
+                                    if (!isBlock)
+                                        map.cells[j][i].updateStatus('dangerous', true);
+                                }
+                            }
+                        }
+                            
+                        else if (j == coordCellY) {
+                            if (map.cells[j][i].status == 'empty') {
+                                
+                                if (i > coordCellX) {
+                                    for (let k = 1; i - k > coordCellY; k++) {
+                                        if ( (map.cells[j][i - k].status == 'unbreakable') || (map.cells[j][i - k].status == 'breakable') )
+                                            isBlock = true;
+                                    }
+                                    if (!isBlock)
+                                        map.cells[j][i].updateStatus('dangerous', true);
+                                }
+                            }
+                        }
+                    }
+                } 
+            }
+        }
+        console.log('---------');
     }
     
     destructingBomb() {
         let coordCellX = parseInt(this.posY / 50),
-            coordCellY = parseInt(this.posX / 50);
+            coordCellY = parseInt(this.posX / 50),
+            bombCoordCellX = coordCellX,
+            bombCoordCellY = coordCellY;
+        
+        if (coordCellX - 1 < map.columns)
+            bombCoordCellX = coordCellX + 1;
+        
+        if (coordCellX + 1 > map.columns)
+            bombCoordCellX = coordCellX - 1;
+        
+        if (coordCellY - 1 < map.rows)
+            bombCoordCellY = coordCellY + 1;
+        
+        if (coordCellY + 1 > map.rows)
+            bombCoordCellY = coordCellY - 1;
+        
         // test if the player is around the bomb + if there is some walls to break, according to the powerKill of the bomb
-        if ( (map.cells[coordCellX - 1][coordCellY].status !== 'unbreakable') || (map.cells[coordCellX + 1][coordCellY].status !== 'unbreakable') ) { // prevent breakable cells to be destruct if they are behind unbreakable cell
+        if ( (map.cells[bombCoordCellX - 1][coordCellY].status !== 'unbreakable') || (map.cells[bombCoordCellX + 1][coordCellY].status !== 'unbreakable') ) { // prevent breakable cells to be destruct if they are behind unbreakable cell
             for (let i = coordCellX - this.powerDestruct; i <= coordCellX + this.powerDestruct; i++) {
                 if (0 < i && i < map.rows) {
+                    console.log(i); 
+                console.log(map.rows);
                     if (map.cells[i][coordCellY].status == 'breakable') {
                         if (map.cells[i][coordCellY].bonusStatus == 'undiscovered') {
                             map.cells[i][coordCellY].updateStatus('bonus', true);
@@ -62,10 +164,13 @@ class Bomb {
                 }
             }
         }
-        if ( (map.cells[coordCellY - 1][coordCellX].status !== 'unbreakable') || (map.cells[coordCellY + 1][coordCellX].status !== 'unbreakable') ) {
+        if ( (map.cells[coordCellX][bombCoordCellY - 1].status !== 'unbreakable') || (map.cells[coordCellX][bombCoordCellY + 1].status !== 'unbreakable') ) {
+             console.log('hey');
             for (let i = coordCellY - this.powerDestruct; i <= coordCellY + this.powerDestruct; i++) { // test on X
                 if (0 < i && i < map.columns) {
+                    
                     if (map.cells[coordCellX][i].status == 'breakable') {
+                        console.log('hello');
                         if (map.cells[coordCellX][i].bonusStatus == 'undiscovered') {
                             map.cells[coordCellX][i].updateStatus('bonus', true);
                             map.cells[coordCellX][i].div.classList.add(map.cells[coordCellX][i].bonus);
