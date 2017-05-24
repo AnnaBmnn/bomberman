@@ -6,7 +6,7 @@ class Player {
     this.playerPosY = playerPosY; 
     this.movement = new Array(); 
     this.direction = 0;
-    this.speed = 10; // Bérénice, si tu veux faire un bonus speed, joues avec ça :)
+    this.speed = 10; 
     this.bombDelay = 2000;  
     this.bombKill = 2;
     this.enableBomb = 1;  //number of bomb you can launch  
@@ -98,7 +98,7 @@ class Player {
       
       // Speed
       if (map.cells[posY][posX].bonus == map.bonusTypes[0])
-        console.log('Up player speed');
+        this.speed += 5;
       
       // power-bomb
       else if (map.cells[posY][posX].bonus == map.bonusTypes[1])
