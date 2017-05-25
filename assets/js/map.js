@@ -139,6 +139,6 @@ function alea(min, max) {
 }
 
 map = new map(13, 17);
-console.log(map.cells);
+//console.log(map.cells);
 map.generateMap();
 map.generateBreakableWall();
