@@ -82,7 +82,6 @@ class Ai extends Player{
       }
     }, 300);
   }
-
 }
 
 fighter = new Ai(3, 50, 50);
