@@ -1,5 +1,5 @@
-$bomberman-width: 30px;
-$bomberman-height: 30px;
+$bomberman-width: 50px;
+$bomberman-height: 50px;
 
 .avatar_down {
     position: absolute;
@@ -12,7 +12,7 @@ $bomberman-height: 30px;
 
 @keyframes down {
   from { background-position: 0px 0; }
-  to { background-position: -125px 0px; }
+  to { background-position: -221px 0px; }
 }
 
 .avatar_left {
@@ -25,8 +25,8 @@ $bomberman-height: 30px;
 }
 
 @keyframes left {
-  from { background-position: 0px -35px; }
-  to { background-position: 125px -35px; }
+  from { background-position: 0px -60px; }
+  to { background-position: 221px -60px; }
 }
 
 .avatar_right {
@@ -39,8 +39,8 @@ $bomberman-height: 30px;
 }
 
 @keyframes right {
-  from { background-position: 0px -70px; }
-  to { background-position: -125px -70px; }
+  from { background-position: 0px -120px; }
+  to { background-position: -221px -120px; }
 }
 
 .avatar_up {
@@ -54,6 +54,6 @@ $bomberman-height: 30px;
 }
 
 @keyframes up {
-  from { background-position: 0px -105px; }
-  to { background-position: -125px -105px; }
+  from { background-position: 0px -180px; }
+  to { background-position: -221px -180px; }
 }
