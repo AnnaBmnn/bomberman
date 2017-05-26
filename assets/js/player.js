@@ -73,7 +73,7 @@ class Player {
         that.div.classList.remove(that.sprite[0], that.sprite[2], that.sprite[3]);
         that.div.classList.add(that.sprite[1]);  
           
-        that.posX = Math.floor((that.playerPosX + 38) / 50);
+        that.posX = Math.floor((that.playerPosX + 40) / 50);
         that.posY = Math.floor((that.playerPosY + 45) / 50);
         
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
@@ -103,7 +103,7 @@ class Player {
         that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[0]);
         that.div.classList.add(that.sprite[3]);
         
-        that.posX = Math.floor((that.playerPosX + 7) / 50);
+        that.posX = Math.floor((that.playerPosX + 4) / 50);
         that.posY = Math.floor((that.playerPosY + 45) / 50);
           
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
@@ -148,8 +148,6 @@ class Player {
     
     let bombPositionUpDown = 45, // Down
         bombPositionLeftRight = 22; // Right
-    
-      console.log(this.lastPlayerDirection);
       
     if (this.lastPlayerDirection == this.movement[0])
         bombPositionUpDown = 49; // Up

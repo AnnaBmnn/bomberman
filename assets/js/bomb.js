@@ -12,7 +12,7 @@ class Bomb {
     launchBomb() {
         this.div = document.createElement('div');
         this.div.classList.add('bomb');
-        this.div.style.top = (this.posY - 17)+ "px"; // + 25 to place the bomb at his feet
+        this.div.style.top = (this.posY - 17) + "px"; // + 25 to place the bomb at his feet
         this.div.style.left = (this.posX - 9) + "px"; // + 15 to center the bomb on the player
 
         let mapDiv = document.querySelector('.map');        
@@ -20,42 +20,53 @@ class Bomb {
         let coordCellX = parseInt(this.posX/ 50),
             coordCellY = parseInt(this.posY/50);
         
-        for (let i = coordCellX - this.powerKill; i < coordCellX; i++) { // test on Y
-            if (i < 0)
-                i = 0;
+        for (let j = coordCellY - this.powerKill; j <= coordCellY; j++) { 
+            if (j < 0)
+                j = 0;
             
-            if (0 < i && i < map.columns) {
-                //don't test for x
-                for (let j = coordCellY - this.powerKill; j < coordCellY; j++) { // test on X
-                    if (j < 0)
-                        j = 0;
+            if (0 < j && j < map.rows) {
+                for (let i = coordCellX - this.powerKill; i <= coordCellX; i++) {
+                    if (i < 0)
+                        i = 0;
                     
-                    if (0 < j && j < map.rows) {
+                    if (0 < i && i < map.columns) {
                         
                         let isBlock = false; // initialise isBlock at false at every loop
                         if (i == coordCellX) {
-                            if (map.cells[j][i].status == 'empty') {
+                            if (map.cells[j][i].status == 'empty' || map.cells[j][i].status == 'bonus') {
                                 
                                 if (j < coordCellY) {
                                     for (let k = 1; j + k < coordCellY; k++) {
                                         if ( (map.cells[j + k][i].status == 'unbreakable') || (map.cells[j + k][i].status == 'breakable') )
                                             isBlock = true;
                                     }
-                                    if (!isBlock)
-                                        map.cells[j][i].updateStatus('dangerous', true);
+                                    if (!isBlock) {
+                                        console.log(map.cells[j][i].bonusStatus);
+                                        if (map.cells[j][i].bonusStatus == 'discovered')
+                                            map.cells[j][i].div.classList.add('dangerous');
+                                        
+                                        else
+                                            map.cells[j][i].updateStatus('dangerous', true);
+                                    }
                                 }
                             }
                         }
                             
                         else if (j == coordCellY) {
-                            if (map.cells[j][i].status == 'empty') {
+                            if (map.cells[j][i].status == 'empty' || map.cells[j][i].status == 'bonus') {
                                 if (i < coordCellX) {
-                                    for (let k = 1; i + k < coordCellY; k++) {
+                                    for (let k = 1; i + k < coordCellX; k++) {
                                         if ( (map.cells[j][i + k].status == 'unbreakable') || (map.cells[j][i + k].status == 'breakable') )
                                             isBlock = true;
                                     }
-                                    if (!isBlock)
-                                        map.cells[j][i].updateStatus('dangerous', true);
+                                    if (!isBlock) {
+                                        console.log(map.cells[j][i].bonusStatus);
+                                        if (map.cells[j][i].bonusStatus == 'discovered')
+                                            map.cells[j][i].div.classList.add('dangerous');
+                                        
+                                        else
+                                            map.cells[j][i].updateStatus('dangerous', true);
+                                    }
                                 }
                             }
                         }
@@ -64,13 +75,12 @@ class Bomb {
             }
         }
         
-        for (let i = coordCellX + this.powerKill; i >= coordCellX; i--) { // test on Y
+        for (let i = coordCellX + this.powerKill; i >= coordCellX; i--) {
             if (i > map.columns - 2)
                 i =  map.columns - 2;
         
             if (0 < i && i < map.columns) {
-                //don't test for x
-                for (let j = coordCellY + this.powerKill; j >= coordCellY; j--) { // test on X
+                for (let j = coordCellY + this.powerKill; j >= coordCellY; j--) {
                     if (j > map.rows - 2)
                             j = map.rows - 2;
                     
@@ -83,29 +93,43 @@ class Bomb {
                                 map.cells[j][i].updateStatus('dangerous', true);
                             
                         } else if (i == coordCellX) {
-                            if (map.cells[j][i].status == 'empty') {
+                            if (map.cells[j][i].status == 'empty' || map.cells[j][i].status == 'bonus') {
                                 
                                 if (j > coordCellY) {
                                     for (let k = 1; j - k > coordCellY; k++) {
                                         if ( (map.cells[j - k][i].status == 'unbreakable') || (map.cells[j - k][i].status == 'breakable') )
                                             isBlock = true;
                                     }
-                                    if (!isBlock)
-                                        map.cells[j][i].updateStatus('dangerous', true);
+                                    if (!isBlock) {
+                                        console.log(map.cells[j][i].bonusStatus);
+                                        if (map.cells[j][i].bonusStatus == 'discovered')
+                                            map.cells[j][i].div.classList.add('dangerous');
+                                        
+                                        else
+                                            map.cells[j][i].updateStatus('dangerous', true);
+                                    }
                                 }
                             }
                         }
                             
                         else if (j == coordCellY) {
-                            if (map.cells[j][i].status == 'empty') {
+                            console.log(map.cells[j][i].status);
+                            if (map.cells[j][i].status == 'empty' || map.cells[j][i].status == 'bonus') {
                                 
                                 if (i > coordCellX) {
-                                    for (let k = 1; i - k > coordCellY; k++) {
+                                    for (let k = 1; i - k > coordCellX; k++) {
                                         if ( (map.cells[j][i - k].status == 'unbreakable') || (map.cells[j][i - k].status == 'breakable') )
                                             isBlock = true;
                                     }
-                                    if (!isBlock)
-                                        map.cells[j][i].updateStatus('dangerous', true);
+                                    if (!isBlock) {
+                                        
+                                        console.log(map.cells[j][i]);
+                                        if (map.cells[j][i].bonusStatus == 'discovered')
+                                            map.cells[j][i].div.classList.add('dangerous');
+                                        
+                                        else
+                                            map.cells[j][i].updateStatus('dangerous', true);
+                                    }
                                 }
                             }
                         }
@@ -136,17 +160,17 @@ class Bomb {
                             if (!is_unbreakable_j_left) {
                                 if (map.cells[i][j].status == 'unbreakable')
                                     is_unbreakable_j_left = true;
-                            
+
                                 else if (map.cells[i][j].status == 'breakable') {
                                     if (map.cells[i][j].bonusStatus == 'undiscovered') {
                                         map.cells[i][j].updateStatus('bonus', true);
                                         map.cells[i][j].div.classList.add(map.cells[i][j].bonus);
                                         map.cells[i][j].bonusStatus = 'discovered';
                                         is_unbreakable_j_left = true;
-                            
+
                                     } else
                                         map.cells[i][j].updateStatus('empty', true);
-                        
+
                                 } else if (map.cells[i][j].bonusStatus == 'discovered') {
                                     map.cells[i][j].updateStatus('empty', true);
                                     map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
@@ -157,14 +181,14 @@ class Bomb {
                             if (!is_unbreakable_i_up) {
                                 if (map.cells[i][j].status == 'unbreakable')
                                     is_unbreakable_i_up = true;
-                            
+
                                 else if (map.cells[i][j].status == 'breakable') {
                                     if (map.cells[i][j].bonusStatus == 'undiscovered') {
                                         map.cells[i][j].updateStatus('bonus', true);
                                         map.cells[i][j].div.classList.add(map.cells[i][j].bonus);
                                         map.cells[i][j].bonusStatus = 'discovered';
                                         is_unbreakable_i_up = true;
-                            
+
                                     } else
                                         map.cells[i][j].updateStatus('empty', true);
                         
@@ -250,17 +274,21 @@ class Bomb {
             if (0 < i && i < map.rows) {
                 for (let j = coordCellY - this.powerKill; j <= coordCellY + this.powerKill; j++) { // test on X
                     if (0 < j && j < map.columns) {
-                        if (i == coordCellX || j == coordCellY){
+                        if (i == coordCellX || j == coordCellY) {
                             if (map.cells[i][j].status == 'dangerous')
                                 map.cells[i][j].updateStatus('empty', true);
+                                
+                            if ( (map.cells[i][j].div.classList.contains('dangerous')) && (map.cells[i][j].status = 'bonus') ) {
+                                map.cells[i][j].div.classList.remove('dangerous');
+                            }
+                                
+                                
                             for (let k = 0; k < map.pirates.length; k++) {
                                 if (map.cells[i][j].posY === parseInt(map.pirates[k].playerPosY/50) && map.cells[i][j].posX === parseInt(map.pirates[k].playerPosX/50)) {
                                     map.pirates[k].playerLives -= 1;
                                 }
                             }
-
                         }
-
                     }
                 }
             }

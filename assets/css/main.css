@@ -31,6 +31,8 @@ body {
     background-color: #8ac691; }
   .map .dangerous {
     background-color: orange; }
+  .map .bonus.dangerous {
+    background-color: orange; }
 
 .bomb {
   background-image: url("../images/bomb.png");
