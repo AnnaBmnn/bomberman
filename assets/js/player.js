@@ -6,7 +6,7 @@ class Player {
     this.playerPosY = playerPosY; 
     this.movement = new Array(); 
     this.direction = 0;
-    this.speed = 8; 
+    this.speed = 1; 
     this.bombDelay = 2000;  
     this.bombKill = 1;
     this.enableBomb = 1;  //number of bomb you can launch  
@@ -42,47 +42,68 @@ class Player {
 
       if (this.direction == that.movement[0]) {
         //up
-        that.posX = Math.floor((that.playerPosX + 15) / 50); //
-        that.posY = Math.floor((that.playerPosY + 20) / 50); //
+        
+        // Change of sprite in function of the movement direction
+        that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[3]);
+        that.div.classList.add(that.sprite[0]);
+        
+        // Tweak player position (hit box) - on x and y
+        that.posX = Math.floor((that.playerPosX + 20) / 50);
+        that.posY = Math.floor((that.playerPosY + 32) / 50);
+          
+        // Detection if the player can walk on the cell or not
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
+            
+            // Move the player of position
             that.playerPosY -= that.speed;
-            that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[3]);
-            that.div.classList.add(that.sprite[0]);
-
-            pirate_player.bonusCheck(that.posX, that.posY);
+            
+            // if bonus on the cell --> apply the bonus to the player
+            that.bonusCheck(that.posX, that.posY);
         }
       } else if (this.direction == that.movement[1]) {
         //right
-        that.posX = Math.floor((that.playerPosX + 45) / 50); //
-        that.posY = Math.floor((that.playerPosY + 40) / 50); //
+        
+        that.div.classList.remove(that.sprite[0], that.sprite[2], that.sprite[3]);
+        that.div.classList.add(that.sprite[1]);  
+          
+        that.posX = Math.floor((that.playerPosX + 38) / 50);
+        that.posY = Math.floor((that.playerPosY + 45) / 50);
+        
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
+            
             that.playerPosX += that.speed;
-            that.div.classList.remove(that.sprite[0], that.sprite[2], that.sprite[3]);
-            that.div.classList.add(that.sprite[1]);
-
-            pirate_player.bonusCheck(that.posX, that.posY);
+            
+            that.bonusCheck(that.posX, that.posY);
         }
       } else if (this.direction == that.movement[2]) {
         //down
-        that.posX = Math.floor((that.playerPosX + 15) / 50); //
-        that.posY = Math.floor((that.playerPosY + 52) / 50); //
+          
+        that.div.classList.remove(that.sprite[1], that.sprite[0], that.sprite[3]);
+        that.div.classList.add(that.sprite[2]);  
+          
+        that.posX = Math.floor((that.playerPosX + 22) / 50);
+        that.posY = Math.floor((that.playerPosY + 55) / 50);
+          
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
+            
             that.playerPosY += that.speed;
-            that.div.classList.remove(that.sprite[1], that.sprite[0], that.sprite[3]);
-            that.div.classList.add(that.sprite[2]);
 
-            pirate_player.bonusCheck(that.posX, that.posY);
+            that.bonusCheck(that.posX, that.posY);
         }
       } else if (this.direction == that.movement[3]) {
         //left
-        that.posX = Math.floor((that.playerPosX - 5) / 50); //
-        that.posY = Math.floor((that.playerPosY + 42) / 50); //
+        
+        that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[0]);
+        that.div.classList.add(that.sprite[3]);
+        
+        that.posX = Math.floor((that.playerPosX + 7) / 50);
+        that.posY = Math.floor((that.playerPosY + 45) / 50);
+          
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
+            
             that.playerPosX -= that.speed;
-            that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[0]);
-            that.div.classList.add(that.sprite[3]);
-
-            pirate_player.bonusCheck(that.posX, that.posY);
+            
+            that.bonusCheck(that.posX, that.posY);
         }
       } else if (this.direction == that.movement[4] && that.enableBomb > 0) {
         that.createBomb();
@@ -102,7 +123,7 @@ class Player {
       
       // power-bomb
       else if (map.cells[posY][posX].bonus == map.bonusTypes[1])
-        this.bombKill++;
+          this.bombKill++;
         
       // add-bomb
       else if (map.cells[posY][posX].bonus == map.bonusTypes[2])
@@ -117,7 +138,19 @@ class Player {
 
   createBomb() {
     this.enableBomb -= 1;
-    let bomb = new Bomb(this.bombKill, this.playerPosX + 15, this.playerPosY + 35, this.bombDelay, this);
+    
+    let bombPositionUpDown = 45, // Down
+        bombPositionLeftRight = 25; // Right
+    
+    if (this.direction == this.movement[0]) // Up
+        bombPositionUpDown = 60;
+    
+    else if (this.direction == this.movement[3]) // Left
+        bombPositionLeftRight = 25;
+      
+    let bomb = new Bomb(this.bombKill, this.playerPosX + bombPositionLeftRight, this.playerPosY + bombPositionUpDown, this.bombDelay, this);
+      
+      
     bomb.launchBomb();
     setTimeout(function() { // delay until the player can launch a bomb again
       pirate_player.enableBomb += 1;

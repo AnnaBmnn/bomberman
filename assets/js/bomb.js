@@ -12,7 +12,7 @@ class Bomb {
     launchBomb() {
         this.div = document.createElement('div');
         this.div.classList.add('bomb');
-        this.div.style.top = (this.posY - 10)+ "px"; // + 25 to place the bomb at his feet
+        this.div.style.top = (this.posY - 16)+ "px"; // + 25 to place the bomb at his feet
         this.div.style.left = this.posX + "px"; // + 15 to center the bomb on the player
 
         let mapDiv = document.querySelector('.map');        
