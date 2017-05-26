@@ -6,11 +6,12 @@ class Player {
     this.playerPosY = playerPosY; 
     this.movement = new Array(); 
     this.direction = 0;
-    this.speed = 1; 
+    this.speed = 8; 
     this.bombDelay = 2000;  
     this.bombKill = 1;
     this.enableBomb = 1;  //number of bomb you can launch  
     this.div = div;
+    this.lastPlayerDirection = 40;
   }
 
   createPlayer() {
@@ -22,6 +23,7 @@ class Player {
     let mapDiv = document.querySelector('.map');        
     mapDiv.appendChild(this.div); 
   }
+    
   getDirection(){
     var that = this;
     window.addEventListener('keydown', function(e){
@@ -39,6 +41,11 @@ class Player {
       that.posY = Math.round(that.playerPosY / 50); //
 //      console.log("Pos x " + that.posX);
 //      console.log("Pos y " + that.posY);
+        
+      if ( (this.direction == that.movement[0]) || (this.direction == that.movement[1]) || (this.direction == that.movement[2]) || (this.direction == that.movement[3]) ) {
+          this.lastPlayerDirection = this.direction;
+      }
+        
 
       if (this.direction == that.movement[0]) {
         //up
@@ -140,16 +147,17 @@ class Player {
     this.enableBomb -= 1;
     
     let bombPositionUpDown = 45, // Down
-        bombPositionLeftRight = 25; // Right
+        bombPositionLeftRight = 22; // Right
     
-    if (this.direction == this.movement[0]) // Up
-        bombPositionUpDown = 60;
+      console.log(this.lastPlayerDirection);
+      
+    if (this.lastPlayerDirection == this.movement[0])
+        bombPositionUpDown = 49; // Up
     
-    else if (this.direction == this.movement[3]) // Left
-        bombPositionLeftRight = 25;
+    else if (this.lastPlayerDirection == this.movement[3]) // Left
+        bombPositionLeftRight = 18;
       
     let bomb = new Bomb(this.bombKill, this.playerPosX + bombPositionLeftRight, this.playerPosY + bombPositionUpDown, this.bombDelay, this);
-      
       
     bomb.launchBomb();
     setTimeout(function() { // delay until the player can launch a bomb again
