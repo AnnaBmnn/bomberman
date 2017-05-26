@@ -12,8 +12,8 @@ class Bomb {
     launchBomb() {
         this.div = document.createElement('div');
         this.div.classList.add('bomb');
-        this.div.style.top = this.posY + "px"; // + 13 to place the bomb at his feet
-        this.div.style.left = this.posX + "px";
+        this.div.style.top = (this.posY - 10)+ "px"; // + 25 to place the bomb at his feet
+        this.div.style.left = this.posX + "px"; // + 15 to center the bomb on the player
 
         let mapDiv = document.querySelector('.map');        
         mapDiv.appendChild(this.div); 
@@ -117,62 +117,125 @@ class Bomb {
     
     destructingBomb() {
         let coordCellX = parseInt(this.posY / 50),
-            coordCellY = parseInt(this.posX / 50),
-            bombCoordCellX = coordCellX,
-            bombCoordCellY = coordCellY;
-        
-        if (coordCellX - 1 < map.columns)
-            bombCoordCellX = coordCellX + 1;
-        
-        if (coordCellX + 1 > map.columns)
-            bombCoordCellX = coordCellX - 1;
-        
-        if (coordCellY - 1 < map.rows)
-            bombCoordCellY = coordCellY + 1;
-        
-        if (coordCellY + 1 > map.rows)
-            bombCoordCellY = coordCellY - 1;
+            coordCellY = parseInt(this.posX / 50);
         
         // test if the player is around the bomb + if there is some walls to break, according to the powerKill of the bomb
-        if ( (map.cells[bombCoordCellX - 1][coordCellY].status !== 'unbreakable') || (map.cells[bombCoordCellX + 1][coordCellY].status !== 'unbreakable') ) { // prevent breakable cells to be destruct if they are behind unbreakable cell
-            for (let i = coordCellX - this.powerDestruct; i <= coordCellX + this.powerDestruct; i++) {
-                if (0 < i && i < map.rows) {
-                    if (map.cells[i][coordCellY].status == 'breakable') {
-                        if (map.cells[i][coordCellY].bonusStatus == 'undiscovered') {
-                            map.cells[i][coordCellY].updateStatus('bonus', true);
-                            map.cells[i][coordCellY].div.classList.add(map.cells[i][coordCellY].bonus);
-                            map.cells[i][coordCellY].bonusStatus = 'discovered';
-                            
-                        } else
-                            map.cells[i][coordCellY].updateStatus('empty', true);
+        
+        // Test on up and left
+        let is_unbreakable_i_up = false,
+            is_unbreakable_j_left = false;
+        
+        for (let i = coordCellX ; i >= coordCellX - this.powerKill; i--) {
+            if (0 <= i && i < map.rows) {
+                
+                for (let j = coordCellY; j >= coordCellY - this.powerKill; j--) {
+                    if (0 <= j && j < map.columns) {
                         
-                    } else if (map.cells[i][coordCellY].bonusStatus == 'discovered') {
-                        map.cells[i][coordCellY].updateStatus('empty', true);
-                        map.cells[i][coordCellY].div.classList.remove(map.cells[i][coordCellY].bonus);
-                        map.cells[i][coordCellY].bonusStatus = null;
+                        if (i == coordCellX) {
+                            
+                            if (!is_unbreakable_j_left) {
+                                if (map.cells[i][j].status == 'unbreakable')
+                                    is_unbreakable_j_left = true;
+                            
+                                else if (map.cells[i][j].status == 'breakable') {
+                                    if (map.cells[i][j].bonusStatus == 'undiscovered') {
+                                        map.cells[i][j].updateStatus('bonus', true);
+                                        map.cells[i][j].div.classList.add(map.cells[i][j].bonus);
+                                        map.cells[i][j].bonusStatus = 'discovered';
+                                        is_unbreakable_j_left = true;
+                            
+                                    } else
+                                        map.cells[i][j].updateStatus('empty', true);
+                        
+                                } else if (map.cells[i][j].bonusStatus == 'discovered') {
+                                    map.cells[i][j].updateStatus('empty', true);
+                                    map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
+                                    map.cells[i][j].bonusStatus = null;
+                                }
+                            }
+                        } else if (j == coordCellY) {
+                            if (!is_unbreakable_i_up) {
+                                if (map.cells[i][j].status == 'unbreakable')
+                                    is_unbreakable_i_up = true;
+                            
+                                else if (map.cells[i][j].status == 'breakable') {
+                                    if (map.cells[i][j].bonusStatus == 'undiscovered') {
+                                        map.cells[i][j].updateStatus('bonus', true);
+                                        map.cells[i][j].div.classList.add(map.cells[i][j].bonus);
+                                        map.cells[i][j].bonusStatus = 'discovered';
+                                        is_unbreakable_i_up = true;
+                            
+                                    } else
+                                        map.cells[i][j].updateStatus('empty', true);
+                        
+                                } else if (map.cells[i][j].bonusStatus == 'discovered') {
+                                    map.cells[i][j].updateStatus('empty', true);
+                                    map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
+                                    map.cells[i][j].bonusStatus = null;
+                                } 
+                            }
+                        }
                     }
-                }
+                }  
             }
         }
-        if ( (map.cells[coordCellX][bombCoordCellY - 1].status !== 'unbreakable') || (map.cells[coordCellX][bombCoordCellY + 1].status !== 'unbreakable') ) {
-            for (let i = coordCellY - this.powerDestruct; i <= coordCellY + this.powerDestruct; i++) { // test on X
-                if (0 < i && i < map.columns) {
-                    
-                    if (map.cells[coordCellX][i].status == 'breakable') {
-                        if (map.cells[coordCellX][i].bonusStatus == 'undiscovered') {
-                            map.cells[coordCellX][i].updateStatus('bonus', true);
-                            map.cells[coordCellX][i].div.classList.add(map.cells[coordCellX][i].bonus);
-                            map.cells[coordCellX][i].bonusStatus = 'discovered';
-                            
-                        } else
-                            map.cells[coordCellX][i].updateStatus('empty', true);
+        
+        // Test on down and right
+        let is_unbreakable_i_down = false,
+            is_unbreakable_j_right = false;
+        
+        for (let i = coordCellX; i <= coordCellX + this.powerKill; i++) {
+            if (0 < i && i < map.rows) {
+                
+                for (let j = coordCellY; j <= coordCellY + this.powerKill; j++) {
+                    if (0 < j && j < map.columns) {
                         
-                    } else if (map.cells[coordCellX][i].bonusStatus == 'discovered') {
-                        map.cells[coordCellX][i].updateStatus('empty', true);
-                        map.cells[coordCellX][i].div.classList.remove(map.cells[coordCellX][i].bonus);
-                        map.cells[coordCellX][i].bonusStatus = null;
+                        if (i == coordCellX) {
+                            
+                            if (!is_unbreakable_j_right) {
+                                if (map.cells[i][j].status == 'unbreakable')
+                                    is_unbreakable_j_right = true;
+                            
+                                else if (map.cells[i][j].status == 'breakable') {
+                                    if (map.cells[i][j].bonusStatus == 'undiscovered') {
+                                        map.cells[i][j].updateStatus('bonus', true);
+                                        map.cells[i][j].div.classList.add(map.cells[i][j].bonus);
+                                        map.cells[i][j].bonusStatus = 'discovered';
+                                        is_unbreakable_j_right = true;
+                            
+                                    } else
+                                        map.cells[i][j].updateStatus('empty', true);
+                        
+                                } else if (map.cells[i][j].bonusStatus == 'discovered') {
+                                    map.cells[i][j].updateStatus('empty', true);
+                                    map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
+                                    map.cells[i][j].bonusStatus = null;
+                                }
+                            }
+                        } else if (j == coordCellY) {
+                            if (!is_unbreakable_i_down) {
+                                if (map.cells[i][j].status == 'unbreakable')
+                                    is_unbreakable_i_down = true;
+                            
+                                else if (map.cells[i][j].status == 'breakable') {
+                                    if (map.cells[i][j].bonusStatus == 'undiscovered') {
+                                        map.cells[i][j].updateStatus('bonus', true);
+                                        map.cells[i][j].div.classList.add(map.cells[i][j].bonus);
+                                        map.cells[i][j].bonusStatus = 'discovered';
+                                        is_unbreakable_i_down = true;
+                            
+                                    } else
+                                        map.cells[i][j].updateStatus('empty', true);
+                        
+                                } else if (map.cells[i][j].bonusStatus == 'discovered') {
+                                    map.cells[i][j].updateStatus('empty', true);
+                                    map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
+                                    map.cells[i][j].bonusStatus = null;
+                                } 
+                            }
+                        }
                     }
-                }
+                }  
             }
         }
         this.div.classList.remove('bomb');  

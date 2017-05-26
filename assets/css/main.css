@@ -25,6 +25,8 @@ body {
     background-color: yellow; }
   .map .bonus {
     background-color: #00ff1d; }
+  .map .bonus.add-bomb {
+    background-color: #358b3f; }
   .map .dangerous {
     background-color: orange; }
 
