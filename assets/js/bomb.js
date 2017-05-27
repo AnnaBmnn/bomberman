@@ -41,7 +41,6 @@ class Bomb {
                                             isBlock = true;
                                     }
                                     if (!isBlock) {
-                                        console.log(map.cells[j][i].bonusStatus);
                                         if (map.cells[j][i].bonusStatus == 'discovered')
                                             map.cells[j][i].div.classList.add('dangerous');
                                         
@@ -60,7 +59,6 @@ class Bomb {
                                             isBlock = true;
                                     }
                                     if (!isBlock) {
-                                        console.log(map.cells[j][i].bonusStatus);
                                         if (map.cells[j][i].bonusStatus == 'discovered')
                                             map.cells[j][i].div.classList.add('dangerous');
                                         
@@ -101,7 +99,6 @@ class Bomb {
                                             isBlock = true;
                                     }
                                     if (!isBlock) {
-                                        console.log(map.cells[j][i].bonusStatus);
                                         if (map.cells[j][i].bonusStatus == 'discovered')
                                             map.cells[j][i].div.classList.add('dangerous');
                                         
@@ -113,7 +110,6 @@ class Bomb {
                         }
                             
                         else if (j == coordCellY) {
-                            console.log(map.cells[j][i].status);
                             if (map.cells[j][i].status == 'empty' || map.cells[j][i].status == 'bonus') {
                                 
                                 if (i > coordCellX) {
@@ -123,7 +119,6 @@ class Bomb {
                                     }
                                     if (!isBlock) {
                                         
-                                        console.log(map.cells[j][i]);
                                         if (map.cells[j][i].bonusStatus == 'discovered')
                                             map.cells[j][i].div.classList.add('dangerous');
                                         
@@ -261,8 +256,7 @@ class Bomb {
                     }
                 }  
             }
-        }
-        this.div.classList.remove('bomb');  
+        }  
     }
     
     killingBomb() {

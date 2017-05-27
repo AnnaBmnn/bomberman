@@ -13,35 +13,94 @@ $cell-height: 50px;
         height: $cell-height;
         width: $cell-width;
         float: left;
-        border: 1px solid black;
     }
 
-    .empty {
-        background-color: blue;
+    .empty.sand {
+        background-image: url('../images/sand/sand.jpg');
+    }
+    
+    .empty.sand2 {
+        background-image: url('../images/sand/sand2.jpg');
+    }
+    
+    .empty.sand3 {
+        background-image: url('../images/sand/sand3.jpg');
     }
 
     .player {
         background-color: blue;
     }
 
+    .unbreakable.corner_top_left {
+        background-image: url('../images/border/corner/corner_top_left.jpg');
+    }
+    
+    .unbreakable.corner_top_right {
+        background-image: url('../images/border/corner/corner_top_right.jpg');
+    }
+    
+    .unbreakable.corner_bottom_left {
+        background-image: url('../images/border/corner/corner_bottom_left.jpg');
+    }
+    
+    .unbreakable.corner_bottom_right {
+        background-image: url('../images/border/corner/corner_bottom_right.jpg');
+    }
+    
+    .unbreakable.border_top {
+        background-image: url('../images/border/top/border_top.jpg');
+    }
+    
+    .unbreakable.border_top2 {
+        background-image: url('../images/border/top/border_top2.jpg');
+    }
+    
+    .unbreakable.border_bottom {
+        background-image: url('../images/border/bottom/border_bottom.jpg');
+    }
+    
+    .unbreakable.border_bottom2 {
+        background-image: url('../images/border/bottom/border_bottom2.jpg');
+    }
+    
+    .unbreakable.border_left {
+        background-image: url('../images/border/left/border_left.jpg');
+    }
+    
+    .unbreakable.border_left2 {
+        background-image: url('../images/border/left/border_left2.jpg');
+    }
+    
+    .unbreakable.border_right {
+        background-image: url('../images/border/right/border_right.jpg');
+    }
+    
+    .unbreakable.border_right2 {
+        background-image: url('../images/border/right/border_right2.jpg');
+    }
+    
+    .unbreakable.hole {
+        background-image: url('../images/hole/hole.jpg');
+    }
+    
     .unbreakable {
-        background-color: red;
+        background-image: url('../images/border/left/border_left.jpg');
     }
 
     .breakable {
-        background-color: yellow;
-    }
-    
-    .bonus {
-        background-color: #00ff1d;
+        background-image: url('../images/bonus/barrel.jpg');
     }
     
     .bonus.power-bomb {
-        background-color: #358b3f;
+        background-image: url('../images/bonus/power-bomb.jpg');
     }
     
     .bonus.add-bomb {
-        background-color: #8ac691;
+        background-image: url('../images/bonus/add-bomb.jpg');
+    }
+    
+    .bonus.speed {
+        background-image: url('../images/bonus/speed.jpg');
     }
 
     .dangerous {

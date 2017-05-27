@@ -1,5 +1,6 @@
 body {
-  background-color: #000;
+  background-image: url(../images/water/water.png);
+  background-repeat: repeat;
   font-family: "Avenir Next";
   box-sizing: border-box; }
 
@@ -13,22 +14,51 @@ body {
   .map .cell {
     height: 50px;
     width: 50px;
-    float: left;
-    border: 1px solid black; }
-  .map .empty {
-    background-color: blue; }
+    float: left; }
+  .map .empty.sand {
+    background-image: url("../images/sand/sand.jpg"); }
+  .map .empty.sand2 {
+    background-image: url("../images/sand/sand2.jpg"); }
+  .map .empty.sand3 {
+    background-image: url("../images/sand/sand3.jpg"); }
   .map .player {
     background-color: blue; }
+  .map .unbreakable.corner_top_left {
+    background-image: url("../images/border/corner/corner_top_left.jpg"); }
+  .map .unbreakable.corner_top_right {
+    background-image: url("../images/border/corner/corner_top_right.jpg"); }
+  .map .unbreakable.corner_bottom_left {
+    background-image: url("../images/border/corner/corner_bottom_left.jpg"); }
+  .map .unbreakable.corner_bottom_right {
+    background-image: url("../images/border/corner/corner_bottom_right.jpg"); }
+  .map .unbreakable.border_top {
+    background-image: url("../images/border/top/border_top.jpg"); }
+  .map .unbreakable.border_top2 {
+    background-image: url("../images/border/top/border_top2.jpg"); }
+  .map .unbreakable.border_bottom {
+    background-image: url("../images/border/bottom/border_bottom.jpg"); }
+  .map .unbreakable.border_bottom2 {
+    background-image: url("../images/border/bottom/border_bottom2.jpg"); }
+  .map .unbreakable.border_left {
+    background-image: url("../images/border/left/border_left.jpg"); }
+  .map .unbreakable.border_left2 {
+    background-image: url("../images/border/left/border_left2.jpg"); }
+  .map .unbreakable.border_right {
+    background-image: url("../images/border/right/border_right.jpg"); }
+  .map .unbreakable.border_right2 {
+    background-image: url("../images/border/right/border_right2.jpg"); }
+  .map .unbreakable.hole {
+    background-image: url("../images/hole/hole.jpg"); }
   .map .unbreakable {
-    background-color: red; }
+    background-image: url("../images/border/left/border_left.jpg"); }
   .map .breakable {
-    background-color: yellow; }
-  .map .bonus {
-    background-color: #00ff1d; }
+    background-image: url("../images/bonus/barrel.jpg"); }
   .map .bonus.power-bomb {
-    background-color: #358b3f; }
+    background-image: url("../images/bonus/power-bomb.jpg"); }
   .map .bonus.add-bomb {
-    background-color: #8ac691; }
+    background-image: url("../images/bonus/add-bomb.jpg"); }
+  .map .bonus.speed {
+    background-image: url("../images/bonus/speed.jpg"); }
   .map .dangerous {
     background-color: orange; }
   .map .bonus.dangerous {

@@ -1,18 +1,21 @@
 class cell { // class cell
-  constructor(posX, posY, status, div) {
+  constructor(posX, posY, status, backgroundSprite, div) {
     this.posX = posX;
     this.posY = posY;
     this.status = status;
     this.bonusStatus = null;
     this.bonus = null;
     this.div = div;
+    this.backgroundSprite = backgroundSprite;
 }
   createDiv(map) {
         this.div = document.createElement('div');
         this.div.classList.add('cell');
         this.div.classList.add(this.status);
+        this.div.classList.add(this.backgroundSprite);
+        
         if (!this.bonusStatus == null)
-            this.div.classList.add(this.bonusStatus);
+            this.div.classList.add(this.backgroundSprite);
 
         map.appendChild(this.div);
     }
@@ -50,16 +53,107 @@ class map {
     this.bonusTypes = ['speed', 'power-bomb', 'add-bomb'];
 }
   generateMap() {
+        let backgroundSprite = '';
         for (let i = 0; i < this.rows; i++) {
             this.cells[i] = [this.columns];
 
             for (let j = 0; j < this.columns; j++) {
                 //define the cell with status unbreakable depending on their place
-                let status = 'empty';
-                if (this.isUnbreakable(i, j))
+                let status = 'empty',
+                    borderAlea = 0;
+                
+                if (this.isUnbreakable(i, j)) {
                     status = 'unbreakable';
+                    
+                    if (i == 0 && j == 0)
+                        backgroundSprite = 'corner_top_left';
+                        
+                    else if (i == 0 && j == this.columns - 1)
+                        backgroundSprite = 'corner_top_right';
+                    
+                    else if (i == this.rows - 1 && j == 0)
+                        backgroundSprite = 'corner_bottom_left';
+                        
+                    else if (i == this.rows - 1 && j == this.columns - 1)
+                        backgroundSprite = 'corner_bottom_right';
+                    
+                    else if (i == 0) {
+                        if (j % 2 !== 0)
+                            borderAlea = 0;
+                        
+                        else
+                            borderAlea = 1;
+                        
+                        if (borderAlea == 0)
+                            backgroundSprite = 'border_top';
+                        
+                        else if (borderAlea == 1)
+                            backgroundSprite = 'border_top2';
+                    }
+                    
+                    else if (i == this.rows - 1) {
+                        if (j % 2 !== 0)
+                            borderAlea = 0;
+                        
+                        else
+                            borderAlea = 1;
+                        
+                        if (borderAlea == 0)
+                            backgroundSprite = 'border_bottom';
+                        
+                        else if (borderAlea == 1)
+                            backgroundSprite = 'border_bottom2';
+                    } 
+                    
+                    else if (j == 0) {
+                        if (i % 2 !== 0)
+                            borderAlea = 0;
+                        
+                        else
+                            borderAlea = 1;
+                        
+                        if (borderAlea == 0)
+                            backgroundSprite = 'border_left';
+                        
+                        else if (borderAlea == 1)
+                            backgroundSprite = 'border_left2';
+                    }
+                    
+                    else if (j == this.columns - 1) {
+                        if (i % 2 !== 0)
+                            borderAlea = 0;
+                        
+                        else
+                            borderAlea = 1;
+                        
+                        if (borderAlea == 0)
+                            backgroundSprite = 'border_right';
+                        
+                        else if (borderAlea == 1)
+                            backgroundSprite = 'border_right2';
+                    }
+                    
+                    else if ( (j % 2 == 0) && (i % 2 == 0) && (j !== 0) && (i !== 0) && (i !== this.rows - 1) && (j !== this.columns - 1) )
+                        backgroundSprite = 'hole';
+                    
+                }
+                
+                if (status == 'empty') {
+                
+                    borderAlea = Math.round(((2 - 0) * Math.random()) + 0);
+                        
+                    if (borderAlea == 0)
+                        backgroundSprite = 'sand';
+                        
+                    else if (borderAlea == 1)
+                        backgroundSprite = 'sand2';
+                
+                    else if (borderAlea == 2)
+                        backgroundSprite = 'sand3';
+                }
+                    
                 //define the cell with status breakable randomly
-                let myCell = new cell(i, j, status);
+                let myCell = new cell(i, j, status, backgroundSprite);
                 myCell.createDiv(this.div);
                 this.cells[i][j] = myCell;
             }
@@ -81,6 +175,7 @@ class map {
             } while ( (this.isUnbreakable(x, y)) || (this.isCorner(x, y)) );
 
             this.cells[x][y].updateStatus('breakable', true);
+            
 
             if (bonus === 1) {
                 this.cells[x][y].bonusStatus = 'undiscovered';
@@ -139,6 +234,5 @@ function alea(min, max) {
 }
 
 map = new map(13, 17);
-//console.log(map.cells);
 map.generateMap();
 map.generateBreakableWall();
