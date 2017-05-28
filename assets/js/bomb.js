@@ -276,11 +276,11 @@ class Bomb {
                             if ( (map.cells[i][j].div.classList.contains('dangerous')) && (map.cells[i][j].status = 'bonus') ) {
                                 map.cells[i][j].div.classList.remove('dangerous');
                             }
-                                
-                                
+                                 
                             for (let k = 0; k < map.pirates.length; k++) {
-                                if (map.cells[i][j].posY === parseInt(map.pirates[k].playerPosY/50) && map.cells[i][j].posX === parseInt(map.pirates[k].playerPosX/50)) {
+                                if (map.cells[i][j].posY == parseInt(map.pirates[k].playerPosX/50) && map.cells[i][j].posX == parseInt(map.pirates[k].playerPosY/50)) {
                                     map.pirates[k].playerLives -= 1;
+                                    console.log( map.pirates[k]);
                                 }
                             }
                         }

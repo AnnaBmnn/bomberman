@@ -35,6 +35,10 @@ class Ai extends Player{
         }
       }
     }
+    if(this.isCloseToPlayer()){
+        super.createBomb();
+        console.log('meme case bitch');
+      }
     if(this.direction == 'bomb') {
       // we come back to the previous case
       let _cell = this.nextCell;
@@ -52,7 +56,7 @@ class Ai extends Player{
         this.direction = 'right';   
     }else {
       //if the player is stuck, launch bomb
-      if(cellsPossibilities.length == 0){
+      if(cellsPossibilities.length == 0 ) {
         this.direction = 'bomb';
       }
       else {
@@ -107,15 +111,41 @@ class Ai extends Player{
         }
       }
       if(_posX ==that.nextCell.posY&&_posY==that.nextCell.posX){
-        console.log(_posX, _posY);
         that.getNewDirection();        
       }
        
     }, 200);
   }
+  isCloseToPlayer(){
+    console.log(map.pirates[0]);
+    for (let i = this.nextCell.posX - this.bombKill; i <= this.nextCell.posX+ this.bombKill; i++) { // test on Y
+        console.log('hey');
+        if (0 < i && i < map.rows) {
+            for (let j = this.nextCell.posY - this.bombKill; j <= this.nextCell.posY + this.bombKill; j++) { // test on X
+
+                if (0 < j && j < map.columns) {
+                    if (i == this.nextCell.posX || j == this.nextCell.posX) {
+                      for (let k = 0; k<map.pirates.length; k++){
+                        
+                        console.log(k);
+                        if(map.pirates[k]!= this){
+                          console.log(parseInt(map.pirates[k].playerPosX/50));
+                          if(this.nextCell.posX == parseInt(map.pirates[k].playerPosY/50) && this.nextCell.posY == parseInt(map.pirates[k].playerPosX/50)){
+                            console.log('istrue');
+                            return true ;
+                          }
+                        }
+                      }
+                    }
+                }
+            }
+        }
+    }
+    return false;
+  }
 }
 
-fighter = new Ai(3, 50, 50);
+fighter = new Ai(3, 750, 550);
 fighter.createPlayer();
 //fighter.setMode();
 //ighter.getRoads();
