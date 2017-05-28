@@ -6,10 +6,10 @@
   height: 50px;
   z-index:4;
   will-change: transform;
-  animation: sprite_bomb 2.5s steps(4) 1;
+  animation: sprite_bomb 2.5s steps(3) 1;
 }
 
 @keyframes sprite_bomb {
 from { background-position: 0px 0; }
-to { background-position: -200px 0; }
+to { background-position: -150px 0; }
 }

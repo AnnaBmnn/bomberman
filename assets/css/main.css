@@ -21,10 +21,24 @@ body {
     background-image: url("../images/sand/sand2.jpg"); }
   .map .sand3 {
     background-image: url("../images/sand/sand3.jpg"); }
-  .map .sand.explosion_left_right,
-  .map .sand2.explosion_left_right,
-  .map .sand3.explosion_left_right {
+  .map .sand.explosion_left_right {
     background-image: url("../images/bomb/bomb_explosion_left_right.png"), url("../images/sand/sand.jpg"); }
+  .map .sand2.explosion_left_right {
+    background-image: url("../images/bomb/bomb_explosion_left_right.png"), url("../images/sand/sand2.jpg"); }
+  .map .sand3.explosion_left_right {
+    background-image: url("../images/bomb/bomb_explosion_left_right.png"), url("../images/sand/sand3.jpg"); }
+  .map .sand.explosion_center {
+    background-image: url("../images/bomb/bomb_explosion_center.png"), url("../images/sand/sand.jpg"); }
+  .map .sand2.explosion_center {
+    background-image: url("../images/bomb/bomb_explosion_center.png"), url("../images/sand/sand2.jpg"); }
+  .map .sand3.explosion_center {
+    background-image: url("../images/bomb/bomb_explosion_center.png"), url("../images/sand/sand3.jpg"); }
+  .map .sand.explosion_up_down {
+    background-image: url("../images/bomb/bomb_explosion_up_down.png"), url("../images/sand/sand.jpg"); }
+  .map .sand2.explosion_up_down {
+    background-image: url("../images/bomb/bomb_explosion_up_down.png"), url("../images/sand/sand2.jpg"); }
+  .map .sand3.explosion_up_down {
+    background-image: url("../images/bomb/bomb_explosion_up_down.png"), url("../images/sand/sand3.jpg"); }
   .map .unbreakable.corner_top_left {
     background-image: url("../images/border/corner/corner_top_left.jpg"); }
   .map .unbreakable.corner_top_right {
@@ -74,13 +88,13 @@ body {
   height: 50px;
   z-index: 4;
   will-change: transform;
-  animation: sprite_bomb 2.5s steps(4) 1; }
+  animation: sprite_bomb 2.5s steps(3) 1; }
 
 @keyframes sprite_bomb {
   from {
     background-position: 0px 0; }
   to {
-    background-position: -200px 0; } }
+    background-position: -150px 0; } }
 
 .avatar_down {
   position: absolute;

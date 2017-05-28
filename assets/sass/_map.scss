@@ -27,16 +27,42 @@ $cell-height: 50px;
         background-image: url('../images/sand/sand3.jpg');
     }
     
-    .sand.explosion_left_right,
-    .sand2.explosion_left_right,
-    .sand3.explosion_left_right{
+    .sand.explosion_left_right{
         background-image: url('../images/bomb/bomb_explosion_left_right.png'), url('../images/sand/sand.jpg');
     }
-
-//    .player {
-//        background-color: blue;
-//    }
-
+    
+    .sand2.explosion_left_right{
+        background-image: url('../images/bomb/bomb_explosion_left_right.png'), url('../images/sand/sand2.jpg');
+    }
+    
+    .sand3.explosion_left_right{
+        background-image: url('../images/bomb/bomb_explosion_left_right.png'), url('../images/sand/sand3.jpg');
+    }
+    
+    .sand.explosion_center{
+        background-image: url('../images/bomb/bomb_explosion_center.png'), url('../images/sand/sand.jpg');
+    }
+    
+    .sand2.explosion_center{
+        background-image: url('../images/bomb/bomb_explosion_center.png'), url('../images/sand/sand2.jpg');
+    }
+    
+    .sand3.explosion_center{
+        background-image: url('../images/bomb/bomb_explosion_center.png'), url('../images/sand/sand3.jpg');
+    }
+    
+    .sand.explosion_up_down{
+        background-image: url('../images/bomb/bomb_explosion_up_down.png'), url('../images/sand/sand.jpg');
+    }
+    
+    .sand2.explosion_up_down{
+        background-image: url('../images/bomb/bomb_explosion_up_down.png'), url('../images/sand/sand2.jpg');
+    }
+    
+    .sand3.explosion_up_down{
+        background-image: url('../images/bomb/bomb_explosion_up_down.png'), url('../images/sand/sand3.jpg');
+    }
+    
     .unbreakable.corner_top_left {
         background-image: url('../images/border/corner/corner_top_left.jpg');
     }
