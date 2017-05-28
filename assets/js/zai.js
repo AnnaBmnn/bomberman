@@ -150,7 +150,16 @@ fighter.createPlayer();
 //ighter.getRoads();
 fighter.movement = ['up', 'right', 'down', 'left', 'bomb'];
 fighter.sprite = ['fighter_up', 'fighter_right', 'fighter_down', 'fighter_left'];
-fighter.getMovePlayer();
+// fighter.getMovePlayer();
+
+// Init Game 
+
+function initGet(){
+
+    document.querySelector('.overlay').style.display = "none";
+    fighter.getMovePlayer();
+
+}
 
 // Game status
 
@@ -173,6 +182,7 @@ function gameOver() {
     document.querySelector('.winner').style.display = "block";
   }
 }
+
 
 // start again
 function resetGame() {

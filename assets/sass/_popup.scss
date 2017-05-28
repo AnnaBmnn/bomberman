@@ -1,3 +1,84 @@
+// Launch Game css 
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 850px;
+  height: 600px;
+  z-index: 100;
+  background-color: white;
+  opacity: 1;
+  transition: all 0.4 ease;
+
+  p {
+    color: black;
+    width: 50%;
+    text-align: center;
+    margin: auto;
+  }
+
+  .first-title {
+    font-size: 60px;
+    margin: 50px auto 50px;
+    letter-spacing: 7px;
+
+  }
+
+
+  .fighter_down_over {
+    margin: 45px auto;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/ai.png');
+    animation: fighterDown 0.8s steps(4) infinite;
+  }
+
+  .goal {
+
+    width: 70%;
+    margin: auto;
+    line-height: 25px;
+    margin-bottom: 50px;
+    font-size: 16px;
+  }
+  span {
+    width: 50%;
+    display: block;
+    text-align: center;
+    color: black;
+    font-size: 30px;
+    margin: auto;
+    letter-spacing: 1px;
+  }
+
+  button {
+    color: black;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 50px;
+    width: 270px;
+    height: 70px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    left: 50%;
+    bottom: 5%;
+    position: absolute;
+    transform: translateX(-50%) translateY(-50%);
+    transition: all 0.4 ease;
+    cursor: pointer;
+
+    &:hover {
+      color: white;
+      background-color: black;
+    }
+  }
+}
+
+
+
 div.infos-counter{
   position: absolute;
   top:40%;
