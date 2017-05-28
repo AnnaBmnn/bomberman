@@ -2,19 +2,42 @@
 <html class="no-js" lang="en" dir="ltr">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-    <title>Bomberman</title>
-    <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/main.css">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <title>Pixel Pirate</title>
+  <link rel="apple-touch-icon" sizes="120x120" href="assets/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+  <link rel="manifest" href="assets/favicons/manifest.json">
+  <link rel="mask-icon" href="assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="assets/css/reset.css">
+  <link rel="stylesheet" href="assets/css/main.css">
 </head>
 
 <body>
-    <div class="map">
-    </div>
-    <script src="assets/js/all.min.js"></script>
+  <div class="infos-counter">
+    <span>Vie(s) : </span><span id="player-lives">3</span><br />
+    <span>Bombe(s) : </span><span id="player-bombs">1</span><br />
+    <span>Vie(s) commodore :</span><span id="ai-lives">3</span>
+  </div>
+  <div class="winner">
+    <img src="assets/images/treasure.png" alt="treasure" />
+    <p>
+      <strong>Félicitations mousaillon !</strong> <br/>Il semblerait que vous ayez réussi à battre le commodore Norrington. <br/> Le trésor est à vous !
+    </p>
+    <button onClick="resetGame()">Rejouer</button>
+  </div>
+  <div class="game-over">
+    <img src="assets/images/over_skull.jpg" alt="skull" />
+    <p>
+      Pas de balles en réserve, pas de poudre, un compas qui n'indique pas le nord et... je m'attendais presque à une épée en bois. Vous êtes sans nul doute le pirate le plus pitoyable dont on m'ait parlé.
+    </p>
+    <button onClick="resetGame()">Recommencer</button>
+  </div>
+  <div class="map">
+  </div>
+  <script src="assets/js/all.min.js"></script>
 </body>
-</body>
-
 </html>

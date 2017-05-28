@@ -110,7 +110,7 @@ class Ai extends Player{
         }
       }
       if(_posX ==that.nextCell.posY&&_posY==that.nextCell.posX){
-        that.getNewDirection();        
+        that.getNewDirection();
       }
 
     }, 200);
@@ -125,7 +125,7 @@ class Ai extends Player{
                 if (0 < j && j < map.columns) {
                     if (i == this.nextCell.posX || j == this.nextCell.posX) {
                       for (let k = 0; k<map.pirates.length; k++){
-                        
+
                         console.log(k);
                         if(map.pirates[k]!= this){
                           console.log(parseInt(map.pirates[k].playerPosX/50));
@@ -151,3 +151,47 @@ fighter.createPlayer();
 fighter.movement = ['up', 'right', 'down', 'left', 'bomb'];
 fighter.sprite = ['fighter_up', 'fighter_right', 'fighter_down', 'fighter_left'];
 fighter.getMovePlayer();
+
+// Game status
+
+// informations counter
+function getInformations(){
+  let playerLivesCounter = document.querySelector('span#player-lives');
+  let playerBombsCounter = document.querySelector('span#player-bombs');
+  let aiLivesCounter = document.querySelector('span#ai-lives');
+
+  playerLivesCounter.innerHTML = map.pirates[0].playerLives;
+  playerBombsCounter.innerHTML = map.pirates[0].bombKill;
+  aiLivesCounter.innerHTML = map.pirates[1].playerLives;
+}
+
+// game over
+function gameOver() {
+  if (map.pirates[0].playerLives <= 0 || map.pirates[0].playerLives === 0) {
+    document.querySelector('.game-over').style.display = "block";
+  } else if (map.pirates[1].playerLives <= 0 || map.pirates[1].playerLives === 0) {
+    document.querySelector('.winner').style.display = "block";
+  }
+}
+
+// start again
+function resetGame() {
+  let ai = document.querySelectorAll('div.avatar');
+  let map_parent = document.querySelector('.map');
+  map_parent.removeChild(ai[1]);
+  // replace player
+  map.pirates[0].playerPosX = 50;
+  map.pirates[0].playerPosX = 50;
+  map.pirates[0].playerLives = 3;
+  map.pirates[0].bombKill = 1;
+
+  // create the AI again
+  map.pirates[1].playerLives = 3;
+  fighter = new Ai(3, 50, 50);
+  fighter.createPlayer();
+  fighter.movement = ['up', 'right', 'down', 'left', 'bomb'];
+  fighter.sprite = ['fighter_up', 'fighter_right', 'fighter_down', 'fighter_left'];
+  fighter.getMovePlayer();
+  document.querySelector('.game-over').style.display = "none";
+  document.querySelector('.winner').style.display = "none";
+}
