@@ -1,0 +1,56 @@
+.fighter_down {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/ai.png');
+    animation: fighterDown 0.8s steps(4) infinite;
+}
+
+@keyframes fighterDown {
+  from { background-position: 0px 0; }
+  to { background-position: -208px 0px; }
+}
+
+.fighter_left {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/ai.png');
+    animation: fighterLeft 0.8s steps(4) infinite;
+}
+
+@keyframes fighterLeft {
+  from { background-position: 0px -57px; }
+  to { background-position: 208px -57px; }
+}
+
+.fighter_right {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/ai.png');
+    animation: fighterRight 0.8s steps(4) infinite;
+}
+
+@keyframes fighterRight {
+  from { background-position: 0px -118px; }
+  to { background-position: -208px -118px; }
+}
+
+.fighter_up {
+    position: absolute;
+    width: $bomberman-width;
+    height: $bomberman-height;
+    will-change: transform;
+    background-image: url('../images/ai.png');
+    animation: fighterUp 0.8s steps(4) infinite;
+    margin: 5px;
+}
+
+@keyframes fighterUp {
+  from { background-position: 0px -170px; }
+  to { background-position: -208px -170px; }
+}

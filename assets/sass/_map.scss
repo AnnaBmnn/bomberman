@@ -15,21 +15,27 @@ $cell-height: 50px;
         float: left;
     }
 
-    .empty.sand {
+    .sand {
         background-image: url('../images/sand/sand.jpg');
     }
     
-    .empty.sand2 {
+    .sand2 {
         background-image: url('../images/sand/sand2.jpg');
     }
     
-    .empty.sand3 {
+    .sand3 {
         background-image: url('../images/sand/sand3.jpg');
     }
-
-    .player {
-        background-color: blue;
+    
+    .sand.explosion_left_right,
+    .sand2.explosion_left_right,
+    .sand3.explosion_left_right{
+        background-image: url('../images/bomb/bomb_explosion_left_right.png'), url('../images/sand/sand.jpg');
     }
+
+//    .player {
+//        background-color: blue;
+//    }
 
     .unbreakable.corner_top_left {
         background-image: url('../images/border/corner/corner_top_left.jpg');

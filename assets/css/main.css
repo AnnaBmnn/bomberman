@@ -15,14 +15,16 @@ body {
     height: 50px;
     width: 50px;
     float: left; }
-  .map .empty.sand {
+  .map .sand {
     background-image: url("../images/sand/sand.jpg"); }
-  .map .empty.sand2 {
+  .map .sand2 {
     background-image: url("../images/sand/sand2.jpg"); }
-  .map .empty.sand3 {
+  .map .sand3 {
     background-image: url("../images/sand/sand3.jpg"); }
-  .map .player {
-    background-color: blue; }
+  .map .sand.explosion_left_right,
+  .map .sand2.explosion_left_right,
+  .map .sand3.explosion_left_right {
+    background-image: url("../images/bomb/bomb_explosion_left_right.png"), url("../images/sand/sand.jpg"); }
   .map .unbreakable.corner_top_left {
     background-image: url("../images/border/corner/corner_top_left.jpg"); }
   .map .unbreakable.corner_top_right {
@@ -65,11 +67,11 @@ body {
     background-color: orange; }
 
 .bomb {
-  background-image: url("../images/bomb.png");
+  background-image: url("../images/bomb/bomb.png");
   background-repeat: no-repeat;
   position: absolute;
-  width: 23px;
-  height: 23px;
+  width: 50px;
+  height: 50px;
   z-index: 4;
   will-change: transform;
   animation: sprite_bomb 2.5s steps(4) 1; }
@@ -78,7 +80,7 @@ body {
   from {
     background-position: 0px 0; }
   to {
-    background-position: -94px 0px; } }
+    background-position: -200px 0; } }
 
 .avatar_down {
   position: absolute;
@@ -136,3 +138,60 @@ body {
     background-position: 0px -170px; }
   to {
     background-position: -221px -170px; } }
+
+.fighter_down {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  will-change: transform;
+  background-image: url("../images/ai.png");
+  animation: fighterDown 0.8s steps(4) infinite; }
+
+@keyframes fighterDown {
+  from {
+    background-position: 0px 0; }
+  to {
+    background-position: -208px 0px; } }
+
+.fighter_left {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  will-change: transform;
+  background-image: url("../images/ai.png");
+  animation: fighterLeft 0.8s steps(4) infinite; }
+
+@keyframes fighterLeft {
+  from {
+    background-position: 0px -57px; }
+  to {
+    background-position: 208px -57px; } }
+
+.fighter_right {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  will-change: transform;
+  background-image: url("../images/ai.png");
+  animation: fighterRight 0.8s steps(4) infinite; }
+
+@keyframes fighterRight {
+  from {
+    background-position: 0px -118px; }
+  to {
+    background-position: -208px -118px; } }
+
+.fighter_up {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  will-change: transform;
+  background-image: url("../images/ai.png");
+  animation: fighterUp 0.8s steps(4) infinite;
+  margin: 5px; }
+
+@keyframes fighterUp {
+  from {
+    background-position: 0px -170px; }
+  to {
+    background-position: -208px -170px; } }

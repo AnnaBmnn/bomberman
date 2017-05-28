@@ -160,6 +160,7 @@ class Player {
       
     let bomb = new Bomb(this.bombKill, this.playerPosX + bombPositionLeftRight, this.playerPosY + bombPositionUpDown, this.bombDelay, this);
       
+    var that = this ;
     bomb.launchBomb();
     var that = this ;
     setTimeout(function() { // delay until the player can launch a bomb again

@@ -29,8 +29,8 @@ class Ai extends Player{
               if((map.cells[i][j]!== this.cell)){
                 if(map.cells[i][j].status == 'empty'||map.cells[i][j].status == 'bonus')
                   cellsPossibilities[cellsPossibilities.length] = map.cells[i][j];
-              } 
-            }              
+              }
+            }
           }
         }
       }
@@ -53,7 +53,7 @@ class Ai extends Player{
       if(this.cell.posY-1 == this.nextCell.posY)
         this.direction = 'left';
       if(this.cell.posY+1 == this.nextCell.posY)
-        this.direction = 'right';   
+        this.direction = 'right';
     }else {
       //if the player is stuck, launch bomb
       if(cellsPossibilities.length == 0 ) {
@@ -70,8 +70,8 @@ class Ai extends Player{
         if(this.cell.posY-1 == this.nextCell.posY)
           this.direction = 'left';
         if(this.cell.posY+1 == this.nextCell.posY)
-          this.direction = 'right';      
-      }      
+          this.direction = 'right';
+      }
     }
 
 
@@ -92,7 +92,7 @@ class Ai extends Player{
         if( that.direction == 'right'){
           _posX = Math.floor((that.playerPosX ) / 50);
           _posY = Math.floor((that.playerPosY ) / 50);
-        
+
         } else {
           if( that.direction == 'down'){
             _posX = Math.floor((that.playerPosX) / 50);
@@ -106,14 +106,14 @@ class Ai extends Player{
             } else {
               _posX = parseInt((that.playerPosX)/50);
               _posY = parseInt((that.playerPosY)/50);
-            }           
-          }         
+            }
+          }
         }
       }
       if(_posX ==that.nextCell.posY&&_posY==that.nextCell.posX){
         that.getNewDirection();        
       }
-       
+
     }, 200);
   }
   isCloseToPlayer(){
@@ -145,11 +145,10 @@ class Ai extends Player{
   }
 }
 
-fighter = new Ai(3, 750, 550);
+fighter = new Ai(3, 50, 50);
 fighter.createPlayer();
 //fighter.setMode();
 //ighter.getRoads();
 fighter.movement = ['up', 'right', 'down', 'left', 'bomb'];
-fighter.sprite = ['avatar_up', 'avatar_right', 'avatar_down', 'avatar_left'];
+fighter.sprite = ['fighter_up', 'fighter_right', 'fighter_down', 'fighter_left'];
 fighter.getMovePlayer();
-
