@@ -27,7 +27,7 @@ class Ai extends Player{
             if((i == this.nextCell.posX)^(j == this.nextCell.posY)){
               //we don't test for the case where the player was
               if((map.cells[i][j]!== this.cell)){
-                if(map.cells[i][j].status == 'empty')
+                if(map.cells[i][j].status == 'empty'||map.cells[i][j].status == 'bonus')
                   cellsPossibilities[cellsPossibilities.length] = map.cells[i][j];
               } 
             }              
@@ -76,11 +76,42 @@ class Ai extends Player{
   getMovePlayer(){
     var that = this ;
     window.setInterval(function(){
+
       that.movePlayer() ;
-      if((parseInt((that.playerPosX)/50)==that.nextCell.posY&&parseInt((that.playerPosY)/50)==that.nextCell.posX)) {
-        that.getNewDirection();
+      let _posX,
+          _posY;
+
+      if( that.direction == 'up'){
+        _posX = Math.floor((that.playerPosX) / 50);
+        _posY = Math.floor((that.playerPosY + 40) / 50);
+      } else {
+        if( that.direction == 'right'){
+          _posX = Math.floor((that.playerPosX ) / 50);
+          _posY = Math.floor((that.playerPosY ) / 50);
+        
+        } else {
+          if( that.direction == 'down'){
+            _posX = Math.floor((that.playerPosX) / 50);
+            _posY = Math.floor((that.playerPosY ) / 50);
+          } else {
+            if( that.direction == 'left'){
+
+              _posX = Math.floor((that.playerPosX + 40 ) / 50);
+              _posY = Math.floor((that.playerPosY) / 50);
+              console.log(_posX, _posY);
+            } else {
+              _posX = parseInt((that.playerPosX)/50);
+              _posY = parseInt((that.playerPosY)/50);
+            }           
+          }         
+        }
       }
-    }, 300);
+      if(_posX ==that.nextCell.posY&&_posY==that.nextCell.posX){
+        console.log(_posX, _posY);
+        that.getNewDirection();        
+      }
+       
+    }, 200);
   }
 }
 
