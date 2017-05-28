@@ -49,7 +49,7 @@ class map {
     this.cells = [rows];
     this.pirates = []; // contains all the players, used by the bomb to know if the bomb kills players or not according to their position on the map
     this.breakableWalls = 100;
-    this.bonusNumber = 80;
+    this.bonusNumber = 60;
     this.bonusTypes = ['speed', 'power-bomb', 'add-bomb'];
 }
   generateMap() {

@@ -6,7 +6,7 @@ class Player {
     this.playerPosY = playerPosY; 
     this.movement = new Array(); 
     this.direction = 0;
-    this.speed = 8; 
+    this.speed = 10; 
     this.bombDelay = 2000;  
     this.bombKill = 1;
     this.enableBomb = 1;  //number of bomb you can launch  
@@ -125,8 +125,11 @@ class Player {
       // Apply bonus to the player
       
       // Speed
-      if (map.cells[posY][posX].bonus == map.bonusTypes[0])
-        this.speed += 5;
+      if (map.cells[posY][posX].bonus == map.bonusTypes[0]) {
+        if (this.speed < 21)
+            this.speed += 1;
+      }
+        
       
       // power-bomb
       else if (map.cells[posY][posX].bonus == map.bonusTypes[1])

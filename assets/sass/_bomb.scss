@@ -6,7 +6,7 @@
   height: 23px;
   z-index:4;
   will-change: transform;
-  animation: sprite_bomb 1s steps(4) 1;
+  animation: sprite_bomb 2.5s steps(4) 1;
 }
 
 @keyframes sprite_bomb {

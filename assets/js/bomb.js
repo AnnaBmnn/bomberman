@@ -256,7 +256,8 @@ class Bomb {
                     }
                 }  
             }
-        }  
+        }
+        this.div.classList.remove('bomb');  
     }
     
     killingBomb() {
