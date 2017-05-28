@@ -37,10 +37,8 @@ class Player {
     that.playerPosX;
     that.playerPosY;
       // Position calcul
-      that.posX = Math.round(that.playerPosX / 50); //
-      that.posY = Math.round(that.playerPosY / 50); //
-//      console.log("Pos x " + that.posX);
-//      console.log("Pos y " + that.posY);
+
+
         
       if ( (this.direction == that.movement[0]) || (this.direction == that.movement[1]) || (this.direction == that.movement[2]) || (this.direction == that.movement[3]) ) {
           this.lastPlayerDirection = this.direction;
@@ -56,7 +54,7 @@ class Player {
         
         // Tweak player position (hit box) - on x and y
         that.posX = Math.floor((that.playerPosX + 20) / 50);
-        that.posY = Math.floor((that.playerPosY + 32) / 50);
+        that.posY = Math.floor((that.playerPosY + 32 + (that.speed - 12)) / 50);
           
         // Detection if the player can walk on the cell or not
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
@@ -73,8 +71,8 @@ class Player {
         that.div.classList.remove(that.sprite[0], that.sprite[2], that.sprite[3]);
         that.div.classList.add(that.sprite[1]);  
           
-        that.posX = Math.floor((that.playerPosX + 40) / 50);
-        that.posY = Math.floor((that.playerPosY + 45) / 50);
+        that.posX = Math.floor((that.playerPosX + 40 + (that.speed - 12)) / 50);
+        that.posY = Math.floor((that.playerPosY + 45 + (that.speed - 12)) / 50);
         
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
             
@@ -89,7 +87,7 @@ class Player {
         that.div.classList.add(that.sprite[2]);  
           
         that.posX = Math.floor((that.playerPosX + 22) / 50);
-        that.posY = Math.floor((that.playerPosY + 55) / 50);
+        that.posY = Math.floor((that.playerPosY + 55 - (that.speed - 12)) / 50);
           
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
             
@@ -100,11 +98,8 @@ class Player {
       } else if (this.direction == that.movement[3]) {
         //left
         
-        that.div.classList.remove(that.sprite[1], that.sprite[2], that.sprite[0]);
-        that.div.classList.add(that.sprite[3]);
-        
-        that.posX = Math.floor((that.playerPosX + 4) / 50);
-        that.posY = Math.floor((that.playerPosY + 45) / 50);
+        that.posX = Math.floor((that.playerPosX + 4 - (that.speed - 12)) / 50);
+        that.posY = Math.floor((that.playerPosY + 45 + (that.speed - 12)) / 50);
           
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
             

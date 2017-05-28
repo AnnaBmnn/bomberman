@@ -37,7 +37,6 @@ class Ai extends Player{
     }
     if(this.isCloseToPlayer()){
         super.createBomb();
-        console.log('meme case bitch');
       }
     if(this.direction == 'bomb') {
       // we come back to the previous case
@@ -145,7 +144,7 @@ class Ai extends Player{
   }
 }
 
-fighter = new Ai(3, 50, 50);
+fighter = new Ai(3, 100, 50);
 fighter.createPlayer();
 //fighter.setMode();
 //ighter.getRoads();

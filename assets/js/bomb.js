@@ -10,6 +10,8 @@ class Bomb {
     }
     
     launchBomb() {
+        //WORK IN PROGRESS : avoid the player to cross by cell where there is bombe
+        //map.cells[Math.floor(this.posY / 50)][Math.floor(this.posX / 50)].div.classList.add('bombed');
         this.div = document.createElement('div');
         this.div.classList.add('bomb');
         
@@ -146,6 +148,8 @@ class Bomb {
     destructingBomb() {
         let coordCellX = parseInt(this.posY / 50),
             coordCellY = parseInt(this.posX / 50);
+        //WORK IN PROGRESS : avoid the player to cross by cell where there is bombe
+        //map.cells[Math.floor(this.posY / 50)][Math.floor(this.posX / 50)].div.classList.remove('bombed');
         
         // test if the player is around the bomb + if there is some walls to break, according to the powerKill of the bomb
         
