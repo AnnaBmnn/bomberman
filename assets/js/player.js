@@ -160,16 +160,17 @@ class Player {
       
     let bomb = new Bomb(this.bombKill, this.playerPosX + bombPositionLeftRight, this.playerPosY + bombPositionUpDown, this.bombDelay, this);
       
+    var that = this ;
     bomb.launchBomb();
     setTimeout(function() { // delay until the player can launch a bomb again
-      pirate_player.enableBomb += 1;
+      that.enableBomb += 1;
       bomb.destructingBomb();
       bomb.killingBomb();
     }, this.bombDelay);
   }
 }
 
-pirate_player = new Player(3, 50, 25);
+pirate_player = new Player(3, 50, 50);
 pirate_player.createPlayer();
 pirate_player.movement = [38, 39, 40, 37, 32];
 pirate_player.sprite = ['avatar_up', 'avatar_right', 'avatar_down', 'avatar_left'];

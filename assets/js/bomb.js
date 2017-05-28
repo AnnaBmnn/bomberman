@@ -12,15 +12,21 @@ class Bomb {
     launchBomb() {
         this.div = document.createElement('div');
         this.div.classList.add('bomb');
-        this.div.style.top = (this.posY - 17) + "px"; // + 25 to place the bomb at his feet
-        this.div.style.left = (this.posX - 9) + "px"; // + 15 to center the bomb on the player
-
-        let mapDiv = document.querySelector('.map');        
-        mapDiv.appendChild(this.div); 
+        
         let coordCellX = parseInt(this.posX/ 50),
             coordCellY = parseInt(this.posY/50);
         
-        for (let j = coordCellY - this.powerKill; j <= coordCellY; j++) { 
+        this.div.style.top = (Math.floor(this.posY / 50) * 50) + "px"; // + 25 to place the bomb at his feet
+        this.div.style.left = (Math.floor(this.posX / 50) * 50) + "px"; // + 15 to center the bomb on the player
+
+        let mapDiv = document.querySelector('.map');        
+        
+        mapDiv.appendChild(this.div); 
+        
+        // j --> x && i --> y
+        // test on up and left
+        
+        for (let j = coordCellY - this.powerKill; j <= coordCellY; j++) {
             if (j < 0)
                 j = 0;
             
@@ -72,6 +78,9 @@ class Bomb {
                 } 
             }
         }
+        
+        // j --> x && i --> y
+        // test on right and down
         
         for (let i = coordCellX + this.powerKill; i >= coordCellX; i--) {
             if (i > map.columns - 2)
@@ -170,7 +179,9 @@ class Bomb {
                                     map.cells[i][j].updateStatus('empty', true);
                                     map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
                                     map.cells[i][j].bonusStatus = null;
-                                }
+                                    
+                                } else if ((map.cells[i][j].status == 'dangerous') || (map.cells[i][j].div.classList.contains('dangerous')) )
+                                    map.cells[i][j].div.classList.add('explosion_left_right');
                             }
                         } else if (j == coordCellY) {
                             if (!is_unbreakable_i_up) {
@@ -191,7 +202,9 @@ class Bomb {
                                     map.cells[i][j].updateStatus('empty', true);
                                     map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
                                     map.cells[i][j].bonusStatus = null;
-                                } 
+                                
+                                } else if ((map.cells[i][j].status == 'dangerous') || (map.cells[i][j].div.classList.contains('dangerous')) )
+                                    map.cells[i][j].div.classList.add('explosion_left_right');
                             }
                         }
                     }
@@ -229,7 +242,9 @@ class Bomb {
                                     map.cells[i][j].updateStatus('empty', true);
                                     map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
                                     map.cells[i][j].bonusStatus = null;
-                                }
+                                    
+                                } else if ((map.cells[i][j].status == 'dangerous') || (map.cells[i][j].div.classList.contains('dangerous')) )
+                                    map.cells[i][j].div.classList.add('explosion_left_right');
                             }
                         } else if (j == coordCellY) {
                             if (!is_unbreakable_i_down) {
@@ -250,7 +265,9 @@ class Bomb {
                                     map.cells[i][j].updateStatus('empty', true);
                                     map.cells[i][j].div.classList.remove(map.cells[i][j].bonus);
                                     map.cells[i][j].bonusStatus = null;
-                                } 
+                                
+                                } else if ((map.cells[i][j].status == 'dangerous') || (map.cells[i][j].div.classList.contains('dangerous')) )
+                                    map.cells[i][j].div.classList.add('explosion_left_right');
                             }
                         }
                     }
@@ -273,10 +290,8 @@ class Bomb {
                             if (map.cells[i][j].status == 'dangerous')
                                 map.cells[i][j].updateStatus('empty', true);
                                 
-                            if ( (map.cells[i][j].div.classList.contains('dangerous')) && (map.cells[i][j].status = 'bonus') ) {
+                            if ( (map.cells[i][j].div.classList.contains('dangerous')) && (map.cells[i][j].status = 'bonus') )
                                 map.cells[i][j].div.classList.remove('dangerous');
-                            }
-                                
                                 
                             for (let k = 0; k < map.pirates.length; k++) {
                                 if (map.cells[i][j].posY === parseInt(map.pirates[k].playerPosY/50) && map.cells[i][j].posX === parseInt(map.pirates[k].playerPosX/50)) {
