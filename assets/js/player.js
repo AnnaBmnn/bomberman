@@ -60,7 +60,8 @@ class Player {
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
 
             // Move the player of position
-            that.playerPosY -= that.speed;
+            if (!map.cells[that.posY-1][that.posX].div.classList.contains('bombed'))
+              that.playerPosY -= that.speed;
 
             // if bonus on the cell --> apply the bonus to the player
             that.bonusCheck(that.posX, that.posY);
@@ -76,7 +77,8 @@ class Player {
 
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
 
-            that.playerPosX += that.speed;
+            if (!map.cells[that.posY][that.posX+1].div.classList.contains('bombed'))
+              that.playerPosX += that.speed;
 
             that.bonusCheck(that.posX, that.posY);
         }
@@ -91,9 +93,10 @@ class Player {
 
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
 
+          if (!map.cells[that.posY+1][that.posX].div.classList.contains('bombed'))
             that.playerPosY += that.speed;
-
-            that.bonusCheck(that.posX, that.posY);
+          
+          pirate_player.bonusCheck(that.posX, that.posY);
         }
       } else if (this.direction == that.movement[3]) {
         //left
@@ -106,7 +109,8 @@ class Player {
 
         if ((map.cells[that.posY][that.posX].status === 'empty') || (map.cells[that.posY][that.posX].status === 'bonus') || (map.cells[that.posY][that.posX].status === 'dangerous')) {
 
-            that.playerPosX -= that.speed;
+            if (!map.cells[that.posY][that.posX-1].div.classList.contains('bombed'))
+              that.playerPosX -= that.speed;
 
             that.bonusCheck(that.posX, that.posY);
         }
