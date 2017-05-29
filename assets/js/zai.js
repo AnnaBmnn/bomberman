@@ -53,7 +53,7 @@ class Ai extends Player{
         this.direction = 'left';
       if(this.cell.posY+1 == this.nextCell.posY)
         this.direction = 'right';
-    }else {
+    } else {
       //if the player is stuck, launch bomb
       if(cellsPossibilities.length == 0 ) {
         this.direction = 'bomb';
@@ -72,8 +72,6 @@ class Ai extends Player{
           this.direction = 'right';
       }
     }
-
-
   }
 
   getMovePlayer(){
@@ -116,23 +114,23 @@ class Ai extends Player{
   }
   isCloseToPlayer(){
     for (let i = this.nextCell.posX - this.bombKill; i <= this.nextCell.posX+ this.bombKill; i++) { // test on Y
-        if (0 < i && i < map.rows) {
-            for (let j = this.nextCell.posY - this.bombKill; j <= this.nextCell.posY + this.bombKill; j++) { // test on X
+      if (0 < i && i < map.rows) {
+        for (let j = this.nextCell.posY - this.bombKill; j <= this.nextCell.posY + this.bombKill; j++) { // test on X
 
-                if (0 < j && j < map.columns) {
-                    if (i == this.nextCell.posX || j == this.nextCell.posX) {
-                      for (let k = 0; k<map.pirates.length; k++){
+          if (0 < j && j < map.columns) {
+            if (i == this.nextCell.posX || j == this.nextCell.posX) {
+              for (let k = 0; k<map.pirates.length; k++){
 
-                        if(map.pirates[k]!= this){
-                          if(this.nextCell.posX == parseInt(map.pirates[k].playerPosY/50) && this.nextCell.posY == parseInt(map.pirates[k].playerPosX/50)){
-                            return true ;
-                          }
-                        }
-                      }
-                    }
+                if(map.pirates[k]!= this){
+                  if(this.nextCell.posX == parseInt(map.pirates[k].playerPosY/50) && this.nextCell.posY == parseInt(map.pirates[k].playerPosX/50)){
+                    return true ;
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
     return false;
   }
@@ -149,10 +147,8 @@ fighter.sprite = ['fighter_up', 'fighter_right', 'fighter_down', 'fighter_left']
 // Init Game 
 
 function initGet(){
-
-    document.querySelector('.overlay').style.display = "none";
-    fighter.getMovePlayer();
-
+  document.querySelector('.overlay').style.display = "none";
+  fighter.getMovePlayer();
 }
 
 // Game status
